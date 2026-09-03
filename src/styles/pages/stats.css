@@ -1,12 +1,9 @@
-/* ── Stats page ───────────────────────────────────────────────────── */
-
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: var(--sp-4);
 }
 
-/* Contribution-style heatmap (7 rows × N week columns) */
 .heatmap {
   display: grid;
   grid-auto-flow: column;
@@ -29,7 +26,6 @@
 
 .heatmap-legend { display: flex; align-items: center; gap: var(--sp-2); font-size: var(--text-xs); color: var(--text-faint); }
 
-/* Pure-CSS bar chart — set --value (0-100) on each bar */
 .bar-chart {
   display: flex;
   align-items: flex-end;
@@ -51,7 +47,6 @@
 .bar-chart__bar:hover { background: var(--accent-hover); }
 .bar-chart__label { font-size: var(--text-xs); color: var(--text-faint); }
 
-/* Horizontal "accuracy per deck" rows */
 .rank-row { display: grid; grid-template-columns: 140px 1fr 56px; align-items: center; gap: var(--sp-3); padding: var(--sp-2) 0; font-size: var(--text-sm); }
 .rank-row__name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .rank-row__value { text-align: right; font-family: var(--font-mono); font-weight: 600; }

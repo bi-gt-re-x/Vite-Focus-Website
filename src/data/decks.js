@@ -1,9 +1,3 @@
-/**
- * Deck metadata. `color` is injected into CSS as --deck-color on .deck-card,
- * so the card's top stripe / emoji tint follow the deck automatically:
- *
- *   <article className="deck-card" style={{ '--deck-color': deck.color }}>
- */
 export const DECKS = [
   {
     id: 'javascript',

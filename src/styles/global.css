@@ -1,5 +1,3 @@
-/* ── Base element styling + small helpers ─────────────────────────── */
-
 body {
   font-family: var(--font-sans);
   font-size: var(--text-base);
@@ -10,7 +8,6 @@ body {
 
 ::selection { background: var(--accent-soft); color: var(--text); }
 
-/* Scrollbars */
 * { scrollbar-width: thin; scrollbar-color: var(--surface-border) transparent; }
 *::-webkit-scrollbar { width: 10px; height: 10px; }
 *::-webkit-scrollbar-track { background: transparent; }
@@ -22,7 +19,6 @@ body {
 }
 *::-webkit-scrollbar-thumb:hover { background: var(--text-faint); background-clip: content-box; }
 
-/* Typography helpers */
 .page-title    { font-size: var(--text-2xl); letter-spacing: -0.02em; }
 .section-title { font-size: var(--text-lg); letter-spacing: -0.01em; }
 .eyebrow {
@@ -36,7 +32,6 @@ body {
 .faint { color: var(--text-faint); }
 .mono  { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 
-/* Utilities */
 .stack       { display: flex; flex-direction: column; gap: var(--sp-4); }
 .row         { display: flex; align-items: center; gap: var(--sp-3); }
 .row-between { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); }
@@ -56,7 +51,6 @@ body {
   border: 0;
 }
 
-/* Shared animations */
 @keyframes fade-in    { from { opacity: 0; }                        to { opacity: 1; } }
 @keyframes slide-up   { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 @keyframes pop-in     { from { opacity: 0; transform: scale(0.94); }      to { opacity: 1; transform: none; } }

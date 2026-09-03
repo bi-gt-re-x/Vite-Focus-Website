@@ -1,5 +1,3 @@
-/* ── Settings page ────────────────────────────────────────────────── */
-
 .settings-layout {
   display: grid;
   grid-template-columns: 200px 1fr;
@@ -22,7 +20,6 @@
 .settings-section { display: flex; flex-direction: column; gap: var(--sp-4); }
 .settings-section + .settings-section { margin-top: var(--sp-6); }
 
-/* Theme picker swatches */
 .theme-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -51,7 +48,6 @@
 .theme-option__preview span { flex: 1; }
 .theme-option__name { font-size: var(--text-sm); font-weight: 600; display: flex; align-items: center; justify-content: space-between; }
 
-/* Duration presets */
 .preset-row { display: flex; gap: var(--sp-2); flex-wrap: wrap; }
 
 .danger-zone {

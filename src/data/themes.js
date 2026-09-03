@@ -1,11 +1,3 @@
-/**
- * Theme registry. Every id here has a matching [data-theme="..."] block
- * in src/styles/tokens.css. Applying a theme is one line:
- *
- *   document.documentElement.dataset.theme = id;
- *
- * `swatch` is only for the preview strip in the settings picker.
- */
 export const THEMES = [
   { id: 'light',    name: 'Daylight',  mode: 'light', swatch: ['#f6f7fb', '#ffffff', '#4f46e5', '#e0483c'] },
   { id: 'dark',     name: 'Graphite',  mode: 'dark',  swatch: ['#0f1218', '#171b24', '#7c6cf5', '#f2695c'] },
@@ -17,7 +9,6 @@ export const THEMES = [
 
 export const DEFAULT_THEME = 'dark';
 
-/** Timer defaults, in minutes. Settings overrides these. */
 export const DEFAULT_TIMER = {
   focus: 25,
   shortBreak: 5,

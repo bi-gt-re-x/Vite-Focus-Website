@@ -1,10 +1,3 @@
-/* ══════════════════════════════════════════════════════════════════
-   REUSABLE UI COMPONENTS
-   buttons · cards · badges · inputs · toggles · progress · modal ·
-   toast · tabs · empty state · skeleton · tooltip
-   ══════════════════════════════════════════════════════════════════ */
-
-/* ───────────────────────────── Button ────────────────────────────── */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -47,7 +40,6 @@
 .btn--pill { border-radius: var(--radius-full); }
 .btn--block { width: 100%; }
 
-/* ────────────────────────────── Card ─────────────────────────────── */
 .card {
   background: var(--surface);
   border: 1px solid var(--surface-border);
@@ -68,7 +60,6 @@
 .card__body   { display: flex; flex-direction: column; gap: var(--sp-3); }
 .card__footer { margin-top: var(--sp-4); padding-top: var(--sp-4); border-top: 1px solid var(--surface-border); display: flex; gap: var(--sp-2); }
 
-/* ───────────────────────────── Badge ─────────────────────────────── */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -87,12 +78,10 @@
 .badge--danger  { background: color-mix(in srgb, var(--danger) 15%, transparent);  color: var(--danger); }
 .badge--dot::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
 
-/* Difficulty pills used on flashcards */
 .badge--easy   { background: color-mix(in srgb, var(--success) 15%, transparent); color: var(--success); }
 .badge--medium { background: color-mix(in srgb, var(--warning) 15%, transparent); color: var(--warning); }
 .badge--hard   { background: color-mix(in srgb, var(--danger) 15%, transparent);  color: var(--danger); }
 
-/* ───────────────────────────── Inputs ────────────────────────────── */
 .field { display: flex; flex-direction: column; gap: var(--sp-2); }
 .field__label { font-size: var(--text-sm); font-weight: 600; }
 .field__hint  { font-size: var(--text-xs); color: var(--text-faint); }
@@ -136,13 +125,11 @@
 .search__icon { position: absolute; left: var(--sp-3); width: 18px; height: 18px; color: var(--text-faint); pointer-events: none; }
 .search .input { padding-left: calc(var(--sp-4) + 20px); }
 
-/* Number stepper (used in Settings for durations) */
 .stepper { display: inline-flex; align-items: center; gap: var(--sp-1); background: var(--bg-elevated); border: 1px solid var(--surface-border); border-radius: var(--radius-md); padding: var(--sp-1); }
 .stepper__btn { width: 30px; height: 30px; border-radius: var(--radius-sm); display: grid; place-items: center; color: var(--text-muted); font-weight: 700; }
 .stepper__btn:hover { background: var(--bg-hover); color: var(--text); }
 .stepper__value { min-width: 52px; text-align: center; font-family: var(--font-mono); font-weight: 700; font-size: var(--text-sm); }
 
-/* Toggle switch */
 .switch { position: relative; display: inline-block; width: 44px; height: 26px; flex-shrink: 0; }
 .switch input { position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
 .switch__track {
@@ -166,7 +153,6 @@
 .switch input:checked + .switch__track::after { transform: translateX(18px); }
 .switch input:focus-visible + .switch__track { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-/* Setting row */
 .setting-row {
   display: flex;
   align-items: center;
@@ -180,7 +166,6 @@
 .setting-row__label { font-size: var(--text-sm); font-weight: 600; }
 .setting-row__desc  { font-size: var(--text-xs); color: var(--text-faint); }
 
-/* ──────────────────────────── Progress ───────────────────────────── */
 .progress {
   height: 8px;
   width: 100%;
@@ -196,7 +181,6 @@
 }
 .progress--sm { height: 5px; }
 
-/* ────────────────────────────── Tabs ─────────────────────────────── */
 .tabs {
   display: inline-flex;
   gap: var(--sp-1);
@@ -215,7 +199,6 @@
 .tab:hover { color: var(--text); }
 .tab--active { background: var(--surface); color: var(--text); box-shadow: var(--shadow-sm); }
 
-/* Filter chips */
 .chip-row { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
 .chip {
   padding: var(--sp-2) var(--sp-3);
@@ -230,7 +213,6 @@
 .chip:hover { border-color: var(--text-faint); color: var(--text); }
 .chip--active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
 
-/* ────────────────────────────── Modal ────────────────────────────── */
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -257,7 +239,6 @@
 .modal__title { font-size: var(--text-xl); }
 .modal__actions { display: flex; justify-content: flex-end; gap: var(--sp-2); margin-top: var(--sp-2); }
 
-/* ────────────────────────────── Toast ────────────────────────────── */
 .toast-region {
   position: fixed;
   bottom: var(--sp-5);
@@ -284,7 +265,6 @@
 .toast--success { border-left-color: var(--success); }
 .toast--danger  { border-left-color: var(--danger); }
 
-/* ───────────────────────── Empty / skeleton ──────────────────────── */
 .empty-state {
   display: flex;
   flex-direction: column;
@@ -312,7 +292,6 @@
 }
 @keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
 
-/* Donut made with conic-gradient — set --pct */
 .donut {
   width: 132px; height: 132px;
   border-radius: 50%;
@@ -329,7 +308,6 @@
 }
 .donut__label { position: relative; z-index: 1; font-family: var(--font-mono); font-weight: 700; font-size: var(--text-xl); }
 
-/* ───────────────────────────── Tooltip ───────────────────────────── */
 .tooltip { position: relative; }
 .tooltip::after {
   content: attr(data-tip);
@@ -350,7 +328,6 @@
 }
 .tooltip:hover::after { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* Keyboard hint key */
 .kbd {
   display: inline-grid;
   place-items: center;

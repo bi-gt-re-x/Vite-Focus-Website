@@ -1,5 +1,3 @@
-/* ── Pomodoro Timer page ──────────────────────────────────────────── */
-
 .timer-page {
   display: flex;
   flex-direction: column;
@@ -8,7 +6,6 @@
   padding-block: var(--sp-6);
 }
 
-/* Mode switcher (Focus / Short break / Long break) */
 .mode-switch {
   display: inline-flex;
   gap: var(--sp-1);
@@ -28,7 +25,6 @@
 .mode-switch__btn:hover { color: var(--text); }
 .mode-switch__btn--active { background: var(--accent); color: var(--accent-text); }
 
-/* Circular dial: an SVG ring + the digits centred on top of it */
 .dial {
   position: relative;
   width: min(360px, 82vw);
@@ -47,8 +43,7 @@
   stroke: var(--accent);
   stroke-width: 10;
   stroke-linecap: round;
-  /* React sets: strokeDasharray = circumference
-                 strokeDashoffset = circumference * (1 - progress) */
+
   transition: stroke-dashoffset 1s linear, stroke var(--dur) var(--ease);
 }
 .dial__glow {
@@ -74,7 +69,6 @@
 .dial__label { font-size: var(--text-sm); font-weight: 600; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; }
 .dial__round { font-size: var(--text-xs); color: var(--text-faint); font-family: var(--font-mono); }
 
-/* Transport controls */
 .timer-controls { display: flex; align-items: center; gap: var(--sp-4); }
 .timer-controls__main {
   width: 76px; height: 76px;
@@ -101,7 +95,6 @@
 .timer-controls__side:hover { color: var(--text); border-color: var(--text-faint); }
 .timer-controls__side svg { width: 20px; height: 20px; }
 
-/* Round dots — one per pomodoro until the long break */
 .round-track { display: flex; align-items: center; gap: var(--sp-2); }
 .round-dot {
   width: 10px; height: 10px;
@@ -112,7 +105,6 @@
 .round-dot--done    { background: var(--accent); }
 .round-dot--current { background: var(--accent); transform: scale(1.5); }
 
-/* Optional task label above the dial */
 .timer-task {
   display: flex;
   align-items: center;
@@ -127,7 +119,6 @@
 }
 .timer-task__input { background: none; border: none; outline: none; min-width: 180px; color: var(--text); }
 
-/* Session summary strip under the dial */
 .session-strip {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -142,6 +133,5 @@
 .session-strip__value { font-family: var(--font-mono); font-size: var(--text-xl); font-weight: 700; }
 .session-strip__label { font-size: var(--text-xs); color: var(--text-faint); }
 
-/* Full-screen "zen" variant — toggle .timer-page--zen */
 .timer-page--zen { position: fixed; inset: 0; background: var(--bg); z-index: var(--z-drawer); justify-content: center; }
 .timer-page--zen .session-strip, .timer-page--zen .mode-switch { display: none; }

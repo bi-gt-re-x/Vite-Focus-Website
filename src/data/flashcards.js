@@ -1,21 +1,5 @@
-/**
- * ══════════════════════════════════════════════════════════════════
- *  FLASHCARDS
- *  One flat array. Filter by `deckId` to get a deck's cards.
- *
- *  Shape:
- *    id         unique string
- *    deckId     matches an id in decks.js
- *    question   front of the card
- *    answer     back of the card
- *    code       optional monospace snippet rendered on the back
- *    difficulty 'easy' | 'medium' | 'hard'   -> drives the badge colour
- *    tags       string[] for filtering
- * ══════════════════════════════════════════════════════════════════
- */
-
 export const FLASHCARDS = [
-  /* ─────────────────── JavaScript Fundamentals ─────────────────── */
+
   { id: 'js-01', deckId: 'javascript', difficulty: 'easy', tags: ['types'],
     question: 'What are the seven primitive types in JavaScript?',
     answer: 'string, number, bigint, boolean, undefined, symbol, and null. Everything else is an object.' },
@@ -120,7 +104,6 @@ export const FLASHCARDS = [
     question: 'for...in vs for...of?',
     answer: 'for...in iterates enumerable string keys, including inherited ones — meant for objects. for...of iterates values of an iterable such as an array, string, Map, or Set.' },
 
-  /* ────────────────────── React Essentials ─────────────────────── */
   { id: 'rc-01', deckId: 'react', difficulty: 'easy', tags: ['basics'],
     question: 'What is JSX?',
     answer: 'A syntax extension that compiles to function calls creating React elements. It is not HTML — it is JavaScript that describes a UI tree.' },
@@ -222,7 +205,6 @@ export const FLASHCARDS = [
     question: 'How do you share state between sibling components?',
     answer: 'Lift it to their common parent, or put it in a context / store both siblings read from. Siblings never talk to each other directly.' },
 
-  /* ─────────────────────── CSS & Layout ────────────────────────── */
   { id: 'css-01', deckId: 'css', difficulty: 'easy', tags: ['box-model'],
     question: 'What does box-sizing: border-box change?',
     answer: 'Width and height then include padding and border instead of only the content box, so an element with width: 200px is actually 200px wide.' },
@@ -323,7 +305,6 @@ export const FLASHCARDS = [
     question: 'display: none vs visibility: hidden vs opacity: 0?',
     answer: 'display: none removes the box entirely; visibility: hidden keeps the space but hides it and blocks clicks; opacity: 0 keeps the space and still receives clicks.' },
 
-  /* ─────────────────── Web APIs & the Browser ──────────────────── */
   { id: 'web-01', deckId: 'webapi', difficulty: 'easy', tags: ['dom'],
     question: 'What is the DOM?',
     answer: 'A live tree of objects the browser builds from your HTML. Scripts read and mutate that tree; the rendered page follows it.' },
@@ -425,7 +406,6 @@ export const FLASHCARDS = [
     question: 'How does a single-page router change the URL without reloading?',
     answer: 'history.pushState / replaceState update the address bar and history entry, and the popstate event tells the app the user pressed back or forward.' },
 
-  /* ────────────────────── CS Foundations ───────────────────────── */
   { id: 'cs-01', deckId: 'cs', difficulty: 'easy', tags: ['complexity'],
     question: 'What does Big-O notation describe?',
     answer: 'How the running time or memory of an algorithm grows as the input grows, ignoring constants — an upper bound on the growth rate, not a stopwatch measurement.' },
@@ -526,7 +506,6 @@ export const FLASHCARDS = [
     question: 'What is the difference between a greedy algorithm and an exhaustive search?',
     answer: 'Greedy takes the locally best option at each step and never reconsiders — fast, but only optimal for certain problems. Exhaustive search checks every possibility and is always correct but expensive.' },
 
-  /* ────────────────────── Git & Tooling ────────────────────────── */
   { id: 'git-01', deckId: 'git', difficulty: 'easy', tags: ['basics'],
     question: 'What does git add actually do?',
     answer: 'It copies the current state of the file into the staging area (index), which is what the next commit will snapshot — not the file on disk at commit time.' },
@@ -627,8 +606,6 @@ export const FLASHCARDS = [
     question: 'What is a git hook, and give one practical use?',
     answer: 'A script git runs at a lifecycle point. A pre-commit hook running the linter and formatter on staged files keeps broken code out of history.' },
 ];
-
-/* ── Derived helpers ──────────────────────────────────────────────── */
 
 export const cardsByDeck = (deckId) => FLASHCARDS.filter((c) => c.deckId === deckId);
 

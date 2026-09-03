@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Study · FocusDeck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../src/styles/reset.css" />
+<link rel="stylesheet" href="../src/styles/tokens.css" />
+<link rel="stylesheet" href="../src/styles/global.css" />
+<link rel="stylesheet" href="../src/styles/layout.css" />
+<link rel="stylesheet" href="../src/styles/components.css" />
+<link rel="stylesheet" href="../src/styles/pages/study.css" />
+</head>
+<body>
+<div class="app" data-collapsed="false">
+  <aside class="sidebar">
+    <div class="sidebar__brand"><div class="sidebar__logo">FD</div><span>FocusDeck</span></div>
+    <nav class="sidebar__nav">
+      <a class="nav-link" href="home.html" data-page="home"><svg class="nav-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Home</span></a>
+      <a class="nav-link" href="timer.html" data-page="timer"><svg class="nav-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l2.5 2.5"/></svg><span>Timer</span></a>
+      <a class="nav-link" href="decks.html" data-page="decks"><svg class="nav-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/></svg><span>Decks</span><span class="nav-link__badge">6</span></a>
+      <a class="nav-link nav-link--active" href="study.html" data-page="study"><svg class="nav-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M8 10h8M8 14h5"/></svg><span>Study</span></a>
+      <a class="nav-link" href="stats.html" data-page="stats"><svg class="nav-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 20V10M12 20V4M19 20v-7"/></svg><span>Stats</span></a>
+      <a class="nav-link" href="settings.html" data-page="settings"><svg class="nav-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg><span>Settings</span></a>
+    </nav>
+    <div class="sidebar__footer">
+      <div class="sidebar__streak"><span>🔥</span><div><strong>7</strong> <span class="faint">day streak</span></div></div>
+    </div>
+  </aside>
+  <div class="app__main">
+    <header class="topbar">
+      <h1 class="topbar__title">Study</h1>
+      <div class="topbar__actions">
+        <div class="topbar__mini-timer" data-running="true"><span class="topbar__mini-dot"></span><span>18:42</span></div>
+        <button class="btn btn--ghost btn--icon tooltip" data-tip="Toggle theme" aria-label="Toggle theme">🌙</button>
+      </div>
+    </header>
+    <main class="content content--focus study-page">
+      <div class="study-header">
+        <div class="study-header__row">
+          <div class="row">
+            <a class="btn btn--ghost btn--sm" href="decks.html">← Decks</a>
+            <span class="badge badge--accent">⚛️ React Essentials</span>
+          </div>
+          <span class="study-counter">7 / 25</span>
+        </div>
+        <div class="progress"><div class="progress__bar" style="width: 28%"></div></div>
+      </div>
+
+      <!-- ── FLIP CARD ──
+           Add .flashcard__inner--flipped to reveal the back.
+           The whole .flashcard is clickable and keyboard-operable.        -->
+      <div class="card-stack">
+        <div class="flashcard" tabindex="0" role="button" aria-label="Flashcard, press Enter to flip">
+          <div class="flashcard__inner">
+            <div class="flashcard__face flashcard__face--front">
+              <span class="flashcard__tag">hooks</span>
+              <span class="flashcard__difficulty badge badge--medium">Medium</span>
+              <p class="flashcard__question">What does the dependency array of useEffect control?</p>
+              <span class="flashcard__hint"><span class="kbd">Space</span> to flip</span>
+            </div>
+            <div class="flashcard__face flashcard__face--back">
+              <span class="flashcard__tag">Answer</span>
+              <span class="flashcard__difficulty badge badge--medium">Medium</span>
+              <p class="flashcard__answer">
+                When the effect re-runs. Omitted means every render, <code>[]</code> means once after mount,
+                and a populated array means whenever one of those values changes between renders.
+              </p>
+              <span class="flashcard__hint">How well did you know it?</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Optional code block, for cards that carry a `code` field.
+           It lives inside .flashcard__face--back, above the hint. -->
+      <div class="card" style="width: min(640px, 100%)">
+        <p class="eyebrow" style="margin-bottom: var(--sp-3)">Card with a code snippet — back face</p>
+        <pre class="flashcard__code">useEffect(() =&gt; {
+  const id = setInterval(tick, 1000);
+  return () =&gt; clearInterval(id);
+}, []);</pre>
+      </div>
+
+      <!-- Shown only after the card is flipped -->
+      <div class="grade-row">
+        <button class="grade-btn grade-btn--again">Again<small>&lt; 1 min</small></button>
+        <button class="grade-btn grade-btn--hard">Hard<small>6 min</small></button>
+        <button class="grade-btn grade-btn--good">Good<small>1 day</small></button>
+        <button class="grade-btn grade-btn--easy">Easy<small>4 days</small></button>
+      </div>
+
+      <div class="study-nav">
+        <button class="btn btn--secondary btn--icon" aria-label="Previous card">←</button>
+        <button class="btn btn--secondary">Flip card</button>
+        <button class="btn btn--secondary btn--icon" aria-label="Next card">→</button>
+        <button class="btn btn--ghost btn--sm">Shuffle</button>
+      </div>
+
+      <p class="keyboard-hints">
+        <span><span class="kbd">Space</span> flip</span>
+        <span><span class="kbd">1</span>–<span class="kbd">4</span> grade</span>
+        <span><span class="kbd">←</span><span class="kbd">→</span> navigate</span>
+        <span><span class="kbd">Esc</span> exit session</span>
+      </p>
+
+      <!-- ── SESSION COMPLETE (render instead of the card when finished) ── -->
+      <h3 class="section-title" style="margin-top: var(--sp-7)">Session complete screen</h3>
+      <section class="session-complete">
+        <span style="font-size: var(--text-3xl)">🎉</span>
+        <p class="eyebrow">Session complete</p>
+        <p class="session-complete__score">84%</p>
+        <p class="muted">21 of 25 cards answered correctly in 6 minutes.</p>
+        <div class="session-complete__breakdown">
+          <div>
+            <div class="session-strip__value" style="color: var(--success)">18</div>
+            <div class="session-strip__label">Good / Easy</div>
+          </div>
+          <div>
+            <div class="session-strip__value" style="color: var(--warning)">3</div>
+            <div class="session-strip__label">Hard</div>
+          </div>
+          <div>
+            <div class="session-strip__value" style="color: var(--danger)">4</div>
+            <div class="session-strip__label">Again</div>
+          </div>
+        </div>
+        <div class="row" style="margin-top: var(--sp-3)">
+          <button class="btn btn--primary">Review the 4 you missed</button>
+          <a class="btn btn--secondary" href="timer.html">Start a break</a>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+</body>
+</html>

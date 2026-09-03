@@ -1,0 +1,323 @@
+/* ══════════════════════════════════════════════════════════════════
+   DESIGN TOKENS + THEMES
+   Themes are applied by setting data-theme on <html>:
+       document.documentElement.dataset.theme = 'forest'
+   Available: light | dark | midnight | forest | sunset | rose
+   Every theme redefines the SAME token names, so nothing else
+   in the stylesheet ever needs to know which theme is active.
+   ══════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Typography ── */
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --text-xs:   0.75rem;   /* 12px */
+  --text-sm:   0.875rem;  /* 14px */
+  --text-base: 1rem;      /* 16px */
+  --text-lg:   1.125rem;  /* 18px */
+  --text-xl:   1.375rem;  /* 22px */
+  --text-2xl:  1.75rem;   /* 28px */
+  --text-3xl:  2.25rem;   /* 36px */
+  --text-4xl:  3rem;      /* 48px */
+  --text-timer: clamp(3.5rem, 12vw, 6rem);
+
+  /* ── Spacing scale (4px base) ── */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 2.5rem;
+  --sp-8: 3rem;
+  --sp-9: 4rem;
+
+  /* ── Radii ── */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 999px;
+
+  /* ── Motion ── */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast: 120ms;
+  --dur: 220ms;
+  --dur-slow: 420ms;
+
+  /* ── Layout ── */
+  --sidebar-w: 244px;
+  --sidebar-w-collapsed: 72px;
+  --topbar-h: 64px;
+  --content-max: 1120px;
+
+  /* ── Z-index ── */
+  --z-sticky: 10;
+  --z-drawer: 40;
+  --z-modal: 50;
+  --z-toast: 60;
+}
+
+/* ───────────────────────── LIGHT (default) ───────────────────────── */
+:root,
+[data-theme='light'] {
+  color-scheme: light;
+
+  --bg:           #f6f7fb;
+  --bg-elevated:  #ffffff;
+  --bg-sunken:    #eceef5;
+  --bg-hover:     rgba(15, 23, 42, 0.045);
+  --bg-active:    rgba(15, 23, 42, 0.08);
+
+  --surface:        #ffffff;
+  --surface-border: #e3e6ef;
+
+  --text:        #14181f;
+  --text-muted:  #5b6472;
+  --text-faint:  #8b93a1;
+  --text-invert: #ffffff;
+
+  --accent:        #4f46e5;
+  --accent-hover:  #4338ca;
+  --accent-soft:   #eceafe;
+  --accent-text:   #ffffff;
+
+  --focus-color: #e0483c;   /* pomodoro "work" colour  */
+  --break-color: #17a67a;   /* short break             */
+  --long-color:  #2f7fd6;   /* long break              */
+
+  --success: #17a67a;
+  --warning: #d98a12;
+  --danger:  #d93b3b;
+
+  --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.06);
+  --shadow-md: 0 4px 14px rgba(16, 24, 40, 0.08);
+  --shadow-lg: 0 18px 40px rgba(16, 24, 40, 0.12);
+
+  --card-face-front: #ffffff;
+  --card-face-back:  #f2f4fb;
+}
+
+/* ───────────────────────────── DARK ──────────────────────────────── */
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg:           #0f1218;
+  --bg-elevated:  #161a22;
+  --bg-sunken:    #0a0d12;
+  --bg-hover:     rgba(255, 255, 255, 0.055);
+  --bg-active:    rgba(255, 255, 255, 0.1);
+
+  --surface:        #171b24;
+  --surface-border: #262c38;
+
+  --text:        #e9ecf3;
+  --text-muted:  #99a2b3;
+  --text-faint:  #6b7486;
+  --text-invert: #0f1218;
+
+  --accent:        #7c6cf5;
+  --accent-hover:  #8f81f7;
+  --accent-soft:   rgba(124, 108, 245, 0.16);
+  --accent-text:   #ffffff;
+
+  --focus-color: #f2695c;
+  --break-color: #35c99a;
+  --long-color:  #4d9df0;
+
+  --success: #35c99a;
+  --warning: #e8ac45;
+  --danger:  #f0605f;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 22px 48px rgba(0, 0, 0, 0.55);
+
+  --card-face-front: #1b2029;
+  --card-face-back:  #212736;
+}
+
+/* ─────────────────────────── MIDNIGHT ────────────────────────────── */
+[data-theme='midnight'] {
+  color-scheme: dark;
+
+  --bg:           #070b14;
+  --bg-elevated:  #0d1424;
+  --bg-sunken:    #04070d;
+  --bg-hover:     rgba(120, 170, 255, 0.07);
+  --bg-active:    rgba(120, 170, 255, 0.13);
+
+  --surface:        #0e1626;
+  --surface-border: #1b2740;
+
+  --text:        #dce6fb;
+  --text-muted:  #8fa2c4;
+  --text-faint:  #5f7095;
+  --text-invert: #070b14;
+
+  --accent:        #3d8bfd;
+  --accent-hover:  #5c9dff;
+  --accent-soft:   rgba(61, 139, 253, 0.16);
+  --accent-text:   #ffffff;
+
+  --focus-color: #ff6b81;
+  --break-color: #2dd4bf;
+  --long-color:  #a78bfa;
+
+  --success: #2dd4bf;
+  --warning: #fbbf24;
+  --danger:  #ff6b81;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.55);
+  --shadow-lg: 0 24px 52px rgba(0, 0, 0, 0.65);
+
+  --card-face-front: #101a2d;
+  --card-face-back:  #14203a;
+}
+
+/* ──────────────────────────── FOREST ─────────────────────────────── */
+[data-theme='forest'] {
+  color-scheme: light;
+
+  --bg:           #f2f6f1;
+  --bg-elevated:  #ffffff;
+  --bg-sunken:    #e6ede3;
+  --bg-hover:     rgba(28, 61, 44, 0.05);
+  --bg-active:    rgba(28, 61, 44, 0.09);
+
+  --surface:        #ffffff;
+  --surface-border: #d9e4d6;
+
+  --text:        #16241c;
+  --text-muted:  #52685a;
+  --text-faint:  #7f9285;
+  --text-invert: #ffffff;
+
+  --accent:        #2f7d54;
+  --accent-hover:  #266645;
+  --accent-soft:   #dff0e5;
+  --accent-text:   #ffffff;
+
+  --focus-color: #c25e2a;
+  --break-color: #2f7d54;
+  --long-color:  #3d7a9c;
+
+  --success: #2f7d54;
+  --warning: #c58b1c;
+  --danger:  #c0453b;
+
+  --shadow-sm: 0 1px 2px rgba(22, 36, 28, 0.07);
+  --shadow-md: 0 4px 14px rgba(22, 36, 28, 0.1);
+  --shadow-lg: 0 18px 40px rgba(22, 36, 28, 0.14);
+
+  --card-face-front: #ffffff;
+  --card-face-back:  #eef5ec;
+}
+
+/* ──────────────────────────── SUNSET ─────────────────────────────── */
+[data-theme='sunset'] {
+  color-scheme: dark;
+
+  --bg:           #1b1116;
+  --bg-elevated:  #251820;
+  --bg-sunken:    #130b0f;
+  --bg-hover:     rgba(255, 200, 170, 0.07);
+  --bg-active:    rgba(255, 200, 170, 0.12);
+
+  --surface:        #261a22;
+  --surface-border: #3b2833;
+
+  --text:        #fbe9e2;
+  --text-muted:  #c4a398;
+  --text-faint:  #96786d;
+  --text-invert: #1b1116;
+
+  --accent:        #f2762e;
+  --accent-hover:  #ff8c4a;
+  --accent-soft:   rgba(242, 118, 46, 0.18);
+  --accent-text:   #1b1116;
+
+  --focus-color: #f2762e;
+  --break-color: #e8b04b;
+  --long-color:  #cf6f9c;
+
+  --success: #7fc98f;
+  --warning: #e8b04b;
+  --danger:  #ef5a5a;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.45);
+  --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 22px 48px rgba(0, 0, 0, 0.6);
+
+  --card-face-front: #2a1c25;
+  --card-face-back:  #33222c;
+}
+
+/* ───────────────────────────── ROSE ──────────────────────────────── */
+[data-theme='rose'] {
+  color-scheme: light;
+
+  --bg:           #fdf6f8;
+  --bg-elevated:  #ffffff;
+  --bg-sunken:    #f6e9ee;
+  --bg-hover:     rgba(88, 24, 45, 0.05);
+  --bg-active:    rgba(88, 24, 45, 0.09);
+
+  --surface:        #ffffff;
+  --surface-border: #f0dbe2;
+
+  --text:        #2b1119;
+  --text-muted:  #6d4c56;
+  --text-faint:  #9b7a84;
+  --text-invert: #ffffff;
+
+  --accent:        #c2306a;
+  --accent-hover:  #a52659;
+  --accent-soft:   #fbe3ec;
+  --accent-text:   #ffffff;
+
+  --focus-color: #c2306a;
+  --break-color: #3f9b8b;
+  --long-color:  #7159c1;
+
+  --success: #3f9b8b;
+  --warning: #cf8b1e;
+  --danger:  #cc3a45;
+
+  --shadow-sm: 0 1px 2px rgba(43, 17, 25, 0.07);
+  --shadow-md: 0 4px 14px rgba(43, 17, 25, 0.09);
+  --shadow-lg: 0 18px 40px rgba(43, 17, 25, 0.13);
+
+  --card-face-front: #ffffff;
+  --card-face-back:  #fdeef3;
+}
+
+/* Follow the OS when no explicit theme has been chosen yet.
+   (Remove this block if you always write data-theme yourself.) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --bg: #0f1218;           --bg-elevated: #161a22;   --bg-sunken: #0a0d12;
+    --bg-hover: rgba(255,255,255,0.055); --bg-active: rgba(255,255,255,0.1);
+    --surface: #171b24;      --surface-border: #262c38;
+    --text: #e9ecf3;         --text-muted: #99a2b3;    --text-faint: #6b7486;
+    --text-invert: #0f1218;
+    --accent: #7c6cf5;       --accent-hover: #8f81f7;
+    --accent-soft: rgba(124,108,245,0.16); --accent-text: #ffffff;
+    --focus-color: #f2695c;  --break-color: #35c99a;   --long-color: #4d9df0;
+    --success: #35c99a;      --warning: #e8ac45;       --danger: #f0605f;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+    --shadow-md: 0 6px 18px rgba(0,0,0,0.45);
+    --shadow-lg: 0 22px 48px rgba(0,0,0,0.55);
+    --card-face-front: #1b2029; --card-face-back: #212736;
+  }
+}
+
+/* Mode accent: set data-mode="focus|short|long" on a container to
+   re-point --accent at the current Pomodoro phase colour. */
+[data-mode='focus'] { --accent: var(--focus-color); --accent-hover: var(--focus-color); }
+[data-mode='short'] { --accent: var(--break-color); --accent-hover: var(--break-color); }
+[data-mode='long']  { --accent: var(--long-color);  --accent-hover: var(--long-color); }

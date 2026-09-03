@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Settings · FocusDeck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../src/styles/reset.css" />
+<link rel="stylesheet" href="../src/styles/tokens.css" />
+<link rel="stylesheet" href="../src/styles/global.css" />
+<link rel="stylesheet" href="../src/styles/layout.css" />
+<link rel="stylesheet" href="../src/styles/components.css" />
+<link rel="stylesheet" href="../src/styles/pages/settings.css" />
+</head>
+<body>
+<div class="app" data-collapsed="false">
+  <aside class="sidebar">
+    <div class="sidebar__brand"><div class="sidebar__logo">FD</div><span>FocusDeck</span></div>
+    <nav class="sidebar__nav">
+      <a class="nav-link" href="home.html" data-page="home"><svg class="nav-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Home</span></a>
+      <a class="nav-link" href="timer.html" data-page="timer"><svg class="nav-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l2.5 2.5"/></svg><span>Timer</span></a>
+      <a class="nav-link" href="decks.html" data-page="decks"><svg class="nav-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/></svg><span>Decks</span><span class="nav-link__badge">6</span></a>
+      <a class="nav-link" href="study.html" data-page="study"><svg class="nav-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M8 10h8M8 14h5"/></svg><span>Study</span></a>
+      <a class="nav-link" href="stats.html" data-page="stats"><svg class="nav-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 20V10M12 20V4M19 20v-7"/></svg><span>Stats</span></a>
+      <a class="nav-link nav-link--active" href="settings.html" data-page="settings"><svg class="nav-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg><span>Settings</span></a>
+    </nav>
+    <div class="sidebar__footer">
+      <div class="sidebar__streak"><span>🔥</span><div><strong>7</strong> <span class="faint">day streak</span></div></div>
+    </div>
+  </aside>
+  <div class="app__main">
+    <header class="topbar">
+      <h1 class="topbar__title">Settings</h1>
+      <div class="topbar__actions">
+        <div class="topbar__mini-timer" data-running="true"><span class="topbar__mini-dot"></span><span>18:42</span></div>
+        <button class="btn btn--ghost btn--icon tooltip" data-tip="Toggle theme" aria-label="Toggle theme">🌙</button>
+      </div>
+    </header>
+    <main class="content">
+      <div class="page-header">
+        <p class="eyebrow">Preferences</p>
+        <h2 class="page-title">Settings</h2>
+      </div>
+
+      <div class="settings-layout">
+        <nav class="settings-nav">
+          <a class="settings-nav__link settings-nav__link--active" href="#timer">Timer</a>
+          <a class="settings-nav__link" href="#appearance">Appearance</a>
+          <a class="settings-nav__link" href="#study">Study</a>
+          <a class="settings-nav__link" href="#data">Data</a>
+        </nav>
+
+        <div>
+          <!-- ── TIMER ── -->
+          <section class="settings-section" id="timer">
+            <h3 class="section-title">Timer</h3>
+
+            <div class="card">
+              <div class="preset-row" style="margin-bottom: var(--sp-4)">
+                <button class="chip chip--active">Classic · 25/5/15</button>
+                <button class="chip">Deep work · 50/10/30</button>
+                <button class="chip">Sprint · 15/3/10</button>
+              </div>
+
+              <div class="setting-row">
+                <div class="setting-row__text">
+                  <span class="setting-row__label">Focus length</span>
+                  <span class="setting-row__desc">Minutes in a single work block</span>
+                </div>
+                <div class="stepper">
+                  <button class="stepper__btn" aria-label="Decrease">−</button>
+                  <span class="stepper__value">25</span>
+                  <button class="stepper__btn" aria-label="Increase">+</button>
+                </div>
+              </div>
+
+              <div class="setting-row">
+                <div class="setting-row__text">
+                  <span class="setting-row__label">Short break</span>
+                  <span class="setting-row__desc">Between focus blocks</span>
+                </div>
+                <div class="stepper">
+                  <button class="stepper__btn" aria-label="Decrease">−</button>
+                  <span class="stepper__value">5</span>
+                  <button class="stepper__btn" aria-label="Increase">+</button>
+                </div>
+              </div>
+
+              <div class="setting-row">
+                <div class="setting-row__text">
+                  <span class="setting-row__label">Long break</span>
+                  <span class="setting-row__desc">After a full set of rounds</span>
+                </div>
+                <div class="stepper">
+                  <button class="stepper__btn" aria-label="Decrease">−</button>
+                  <span class="stepper__value">15</span>
+                  <button class="stepper__btn" aria-label="Increase">+</button>
+                </div>
+              </div>
+
+              <div class="setting-row">
+                <div class="setting-row__text">
+                  <span class="setting-row__label">Rounds before a long break</span>
+                  <span class="setting-row__desc">How many focus blocks per set</span>
+                </div>
+                <div class="stepper">
+                  <button class="stepper__btn" aria-label="Decrease">−</button>
+                  <span class="stepper__value">4</span>
+                  <button class="stepper__btn" aria-label="Increase">+</button>
+                </div>
+              </div>
+
+              <div class="setting-row">
+                <div class="setting-row__text">
+                  <span class="setting-row__label">Auto-start breaks</span>
+                  <span class="setting-row__desc">Roll straight into the break when focus ends</span>
+                </div>
+                <label class="switch"><input type="checkbox" checked /><span class="switch__track"></span></label>
+              </div>
+
+              <div class="setting-row">
+                <div class="setting-row__text">
+                  <span class="setting-row__label">Auto-start focus</span>
+                  <span class="setting-row__desc">Begin the next block as soon as the break ends</span>
+                </div>
+                <label class="switch"><input type="checkbox" /><span class="switch__track"></span></label>
+              </div>
+
+              <div class="setting-row">
+                <div class="setting-row__text">
+                  <span class="setting-row__label">Sound on completion</span>
+                  <span class="setting-row__desc">A chime when a phase finishes</span>
+                </div>
+                <label class="switch"><input type="checkbox" checked /><span class="switch__track"></span></label>
+              </div>
+
+              <div class="setting-row">
+                <div class="setting-row__text">
+                  <span class="setting-row__label">Desktop notifications</span>
+                  <span class="setting-row__desc">Requires browser permission</span>
+                </div>
+                <label class="switch"><input type="checkbox" /><span class="switch__track"></span></label>
+              </div>
+            </div>
+          </section>
+
+          <!-- ── APPEARANCE ── -->
+          <section class="settings-section" id="appearance">
+            <h3 class="section-title">Appearance</h3>
+            <div class="card">
+              <p class="muted" style="font-size: var(--text-sm); margin-bottom: var(--sp-4)">
+                Themes only swap CSS custom properties — nothing else in the app changes.
+              </p>
+              <div class="theme-grid">
+                <button class="theme-option">
+                  <span class="theme-option__preview"><span style="background:#f6f7fb"></span><span style="background:#ffffff"></span><span style="background:#4f46e5"></span><span style="background:#e0483c"></span></span>
+                  <span class="theme-option__name">Daylight</span>
+                </button>
+                <button class="theme-option theme-option--active">
+                  <span class="theme-option__preview"><span style="background:#0f1218"></span><span style="background:#171b24"></span><span style="background:#7c6cf5"></span><span style="background:#f2695c"></span></span>
+                  <span class="theme-option__name">Graphite <span class="badge badge--accent">Active</span></span>
+                </button>
+                <button class="theme-option">
+                  <span class="theme-option__preview"><span style="background:#070b14"></span><span style="background:#0e1626"></span><span style="background:#3d8bfd"></span><span style="background:#ff6b81"></span></span>
+                  <span class="theme-option__name">Midnight</span>
+                </button>
+                <button class="theme-option">
+                  <span class="theme-option__preview"><span style="background:#f2f6f1"></span><span style="background:#ffffff"></span><span style="background:#2f7d54"></span><span style="background:#c25e2a"></span></span>
+                  <span class="theme-option__name">Forest</span>
+                </button>
+                <button class="theme-option">
+                  <span class="theme-option__preview"><span style="background:#1b1116"></span><span style="background:#261a22"></span><span style="background:#f2762e"></span><span style="background:#e8b04b"></span></span>
+                  <span class="theme-option__name">Sunset</span>
+                </button>
+                <button class="theme-option">
+                  <span class="theme-option__preview"><span style="background:#fdf6f8"></span><span style="background:#ffffff"></span><span style="background:#c2306a"></span><span style="background:#3f9b8b"></span></span>
+                  <span class="theme-option__name">Rose</span>
+                </button>
+              </div>
+
+              <div class="setting-row" style="margin-top: var(--sp-4)">
+                <div class="setting-row__text">
+                  <span class="setting-row__label">Follow system theme</span>
+                  <span class="setting-row__desc">Switch with your OS light/dark setting</span>
+                </div>
+                <label class="switch"><input type="checkbox" /><span class="switch__track"></span></label>
+              </div>
+
+              <div class="setting-row">
+                <div class="setting-row__text">
+                  <span class="setting-row__label">Tint the timer by phase</span>
+                  <span class="setting-row__desc">Focus red, break green, long break blue</span>
+                </div>
+                <label class="switch"><input type="checkbox" checked /><span class="switch__track"></span></label>
+              </div>
+            </div>
+          </section>
+
+          <!-- ── STUDY ── -->
+          <section class="settings-section" id="study">
+            <h3 class="section-title">Study</h3>
+            <div class="card">
+              <div class="setting-row">
+                <div class="setting-row__text">
+                  <span class="setting-row__label">Cards per session</span>
+                  <span class="setting-row__desc">How many to queue when you start studying</span>
+                </div>
+                <select class="select" style="width: auto">
+                  <option>10</option><option selected>20</option><option>30</option><option>All due</option>
+                </select>
+              </div>
+              <div class="setting-row">
+                <div class="setting-row__text">
+                  <span class="setting-row__label">Shuffle cards</span>
+                  <span class="setting-row__desc">Randomise order instead of deck order</span>
+                </div>
+                <label class="switch"><input type="checkbox" checked /><span class="switch__track"></span></label>
+              </div>
+              <div class="setting-row">
+                <div class="setting-row__text">
+                  <span class="setting-row__label">Reverse mode</span>
+                  <span class="setting-row__desc">Show the answer first and recall the question</span>
+                </div>
+                <label class="switch"><input type="checkbox" /><span class="switch__track"></span></label>
+              </div>
+              <div class="setting-row">
+                <div class="setting-row__text">
+                  <span class="setting-row__label">Difficulty filter</span>
+                  <span class="setting-row__desc">Only study cards at these levels</span>
+                </div>
+                <div class="chip-row">
+                  <button class="chip chip--active">Easy</button>
+                  <button class="chip chip--active">Medium</button>
+                  <button class="chip chip--active">Hard</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ── DATA ── -->
+          <section class="settings-section" id="data">
+            <h3 class="section-title">Data</h3>
+            <div class="card">
+              <div class="setting-row">
+                <div class="setting-row__text">
+                  <span class="setting-row__label">Export progress</span>
+                  <span class="setting-row__desc">Download your stats and card history as JSON</span>
+                </div>
+                <button class="btn btn--secondary btn--sm">Export</button>
+              </div>
+              <div class="setting-row">
+                <div class="setting-row__text">
+                  <span class="setting-row__label">Import</span>
+                  <span class="setting-row__desc">Restore from a previously exported file</span>
+                </div>
+                <button class="btn btn--secondary btn--sm">Choose file</button>
+              </div>
+            </div>
+
+            <div class="danger-zone">
+              <span class="danger-zone__title">Danger zone</span>
+              <p class="muted" style="font-size: var(--text-sm)">
+                Resetting clears every review record, streak, and session log stored in this browser. It cannot be undone.
+              </p>
+              <div class="row">
+                <button class="btn btn--danger btn--sm">Reset study progress</button>
+                <button class="btn btn--danger btn--sm">Clear all data</button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- ── MODAL + TOAST reference markup (render conditionally in React) ── -->
+      <h3 class="section-title" style="margin-top: var(--sp-7)">Modal &amp; toast reference</h3>
+      <div class="card" style="position: relative; min-height: 320px; overflow: hidden">
+        <div class="modal-backdrop" style="position: absolute">
+          <div class="modal" role="dialog" aria-modal="true" aria-labelledby="m-title">
+            <h4 class="modal__title" id="m-title">Clear all data?</h4>
+            <p class="muted">This removes every deck record, streak and session from this browser. There is no undo.</p>
+            <div class="modal__actions">
+              <button class="btn btn--secondary">Cancel</button>
+              <button class="btn btn--danger">Yes, clear it</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="display: flex; gap: var(--sp-3); flex-wrap: wrap">
+        <div class="toast toast--success"><span>✅</span><span>Settings saved</span></div>
+        <div class="toast"><span>⏱️</span><span>Focus session complete — take a break</span></div>
+        <div class="toast toast--danger"><span>⚠️</span><span>Could not read that import file</span></div>
+      </div>
+    </main>
+  </div>
+</div>
+</body>
+</html>

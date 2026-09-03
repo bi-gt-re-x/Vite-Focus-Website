@@ -1,0 +1,71 @@
+/* ── Settings page ────────────────────────────────────────────────── */
+
+.settings-layout {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: var(--sp-6);
+  align-items: start;
+}
+
+.settings-nav { position: sticky; top: calc(var(--topbar-h) + var(--sp-4)); display: flex; flex-direction: column; gap: 2px; }
+.settings-nav__link {
+  padding: var(--sp-3);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+.settings-nav__link:hover { background: var(--bg-hover); color: var(--text); }
+.settings-nav__link--active { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+
+.settings-section { display: flex; flex-direction: column; gap: var(--sp-4); }
+.settings-section + .settings-section { margin-top: var(--sp-6); }
+
+/* Theme picker swatches */
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--sp-3);
+}
+.theme-option {
+  padding: var(--sp-3);
+  border-radius: var(--radius-md);
+  border: 2px solid var(--surface-border);
+  background: var(--bg-elevated);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  text-align: left;
+  transition: border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+}
+.theme-option:hover { transform: translateY(-2px); }
+.theme-option--active { border-color: var(--accent); }
+.theme-option__preview {
+  height: 52px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  overflow: hidden;
+  border: 1px solid var(--surface-border);
+}
+.theme-option__preview span { flex: 1; }
+.theme-option__name { font-size: var(--text-sm); font-weight: 600; display: flex; align-items: center; justify-content: space-between; }
+
+/* Duration presets */
+.preset-row { display: flex; gap: var(--sp-2); flex-wrap: wrap; }
+
+.danger-zone {
+  border: 1px solid color-mix(in srgb, var(--danger) 35%, transparent);
+  background: color-mix(in srgb, var(--danger) 6%, transparent);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+.danger-zone__title { color: var(--danger); font-size: var(--text-base); font-weight: 600; }
+
+@media (max-width: 780px) {
+  .settings-layout { grid-template-columns: 1fr; }
+  .settings-nav { position: static; flex-direction: row; overflow-x: auto; }
+}

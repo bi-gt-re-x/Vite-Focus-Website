@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { THEMES } from "../data/themes";
 
 export default function SettingsPage() {
   return (
@@ -354,16 +355,6 @@ export default function SettingsPage() {
                   </p>
 
                   <div className="theme-grid">
-                    <button className="theme-option">
-                      <span className="theme-option__preview">
-                        <span style={{ background: "#f6f7fb" }}></span>
-                        <span style={{ background: "#ffffff" }}></span>
-                        <span style={{ background: "#4f46e5" }}></span>
-                        <span style={{ background: "#e0483c" }}></span>
-                      </span>
-                      <span className="theme-option__name">Daylight</span>
-                    </button>
-
                     <button className="theme-option theme-option--active">
                       <span className="theme-option__preview">
                         <span style={{ background: "#0f1218" }}></span>
@@ -377,45 +368,18 @@ export default function SettingsPage() {
                       </span>
                     </button>
 
-                    <button className="theme-option">
-                      <span className="theme-option__preview">
-                        <span style={{ background: "#070b14" }}></span>
-                        <span style={{ background: "#0e1626" }}></span>
-                        <span style={{ background: "#3d8bfd" }}></span>
-                        <span style={{ background: "#ff6b81" }}></span>
-                      </span>
-                      <span className="theme-option__name">Midnight</span>
-                    </button>
-
-                    <button className="theme-option">
-                      <span className="theme-option__preview">
-                        <span style={{ background: "#f2f6f1" }}></span>
-                        <span style={{ background: "#ffffff" }}></span>
-                        <span style={{ background: "#2f7d54" }}></span>
-                        <span style={{ background: "#c25e2a" }}></span>
-                      </span>
-                      <span className="theme-option__name">Forest</span>
-                    </button>
-
-                    <button className="theme-option">
-                      <span className="theme-option__preview">
-                        <span style={{ background: "#1b1116" }}></span>
-                        <span style={{ background: "#261a22" }}></span>
-                        <span style={{ background: "#f2762e" }}></span>
-                        <span style={{ background: "#e8b04b" }}></span>
-                      </span>
-                      <span className="theme-option__name">Sunset</span>
-                    </button>
-
-                    <button className="theme-option">
-                      <span className="theme-option__preview">
-                        <span style={{ background: "#fdf6f8" }}></span>
-                        <span style={{ background: "#ffffff" }}></span>
-                        <span style={{ background: "#c2306a" }}></span>
-                        <span style={{ background: "#3f9b8b" }}></span>
-                      </span>
-                      <span className="theme-option__name">Rose</span>
-                    </button>
+                    {THEMES
+                      .filter((theme) => theme.name !== 'Graphite')
+                      .map((theme) => (
+                        <button key={theme.name} className="theme-option">
+                          <span className="theme-option__preview">
+                            {theme.swatch.map((colorCode, index) => (
+                              <span key={index} style={{ background: colorCode }}></span>
+                            ))}
+                          </span>
+                          <span className="theme-option__name">{theme.name}</span>
+                        </button>
+                      ))}
                   </div>
 
                   <div

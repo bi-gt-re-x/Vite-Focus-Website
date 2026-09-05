@@ -1,3 +1,5 @@
+import { DECKS } from "../data/decks.js";
+
 export default function DecksPage() {
   return (
       <div className="app" data-collapsed="false">
@@ -62,119 +64,26 @@ export default function DecksPage() {
             </div>
 
             <section className="deck-grid">
-              <article className="deck-card" style={{ '--deck-color': '#e5b53a' }}>
-                <div className="deck-card__top">
-                  <div className="deck-card__emoji">🟨</div>
-                  <div>
-                    <h3 className="deck-card__name">JavaScript Fundamentals</h3>
-                    <p className="deck-card__meta"><span>25 cards</span> · <span>4 due</span></p>
+              {DECKS.map((deck) => (
+                <article className="deck-card" style={{ '--deck-color': deck.color }}>
+                  <div className="deck-card__top">
+                    <div className="deck-card__emoji">{deck.emoji}</div>
+                    <div>
+                      <h3 className="deck-card__name">{deck.name}</h3>
+                      <p className="deck-card__meta"><span>25 cards</span> · <span>4 due</span></p>
+                    </div>
                   </div>
-                </div>
-                <p className="deck-card__desc">Types, scope, closures, prototypes, async, and the quirks that show up in every interview.</p>
-                <div className="deck-card__progress">
-                  <div className="row-between"><span className="faint" style={{ fontSize: 'var(--text-xs)' }}>Mastery</span><span className="mono" style={{ fontSize: 'var(--text-xs)' }}>72%</span></div>
-                  <div className="progress"><div className="progress__bar" style={{ width: '72%' }}></div></div>
-                </div>
-                <div className="deck-card__actions">
-                  <a className="btn btn--primary btn--sm grow" href="/study">Study</a>
-                  <button className="btn btn--secondary btn--sm">Browse</button>
-                </div>
-              </article>
-
-              <article className="deck-card" style={{ '--deck-color': '#4d9df0' }}>
-                <div className="deck-card__top">
-                  <div className="deck-card__emoji">⚛️</div>
-                  <div>
-                    <h3 className="deck-card__name">React Essentials</h3>
-                    <p className="deck-card__meta"><span>25 cards</span> · <span>8 due</span></p>
+                  <p className="deck-card__desc">{deck.description}</p>
+                  <div className="deck-card__progress">
+                    <div className="row-between"><span className="faint" style={{ fontSize: 'var(--text-xs)' }}>Mastery</span><span className="mono" style={{ fontSize: 'var(--text-xs)' }}>72%</span></div>
+                    <div className="progress"><div className="progress__bar" style={{ width: '72%' }}></div></div>
                   </div>
-                </div>
-                <p className="deck-card__desc">Components, hooks, rendering behaviour, state management, and performance.</p>
-                <div className="deck-card__progress">
-                  <div className="row-between"><span className="faint" style={{ fontSize: 'var(--text-xs)' }}>Mastery</span><span className="mono" style={{ fontSize: 'var(--text-xs)' }}>54%</span></div>
-                  <div className="progress"><div className="progress__bar" style={{ width: '54%' }}></div></div>
-                </div>
-                <div className="deck-card__actions">
-                  <a className="btn btn--primary btn--sm grow" href="study">Study</a>
-                  <button className="btn btn--secondary btn--sm">Browse</button>
-                </div>
-              </article>
-
-              <article className="deck-card" style={{ '--deck-color': '#c46be0' }}>
-                <div className="deck-card__top">
-                  <div className="deck-card__emoji">🎨</div>
-                  <div>
-                    <h3 className="deck-card__name">CSS & Layout</h3>
-                    <p className="deck-card__meta"><span>25 cards</span> · <span>0 due</span></p>
+                  <div className="deck-card__actions">
+                    <a className="btn btn--primary btn--sm grow" href="/study">Study</a>
+                    <button className="btn btn--secondary btn--sm">Browse</button>
                   </div>
-                </div>
-                <p className="deck-card__desc">The cascade, specificity, flexbox, grid, units, and modern layout techniques.</p>
-                <div className="deck-card__progress">
-                  <div className="row-between"><span className="faint" style={{ fontSize: 'var(--text-xs)' }}>Mastery</span><span className="mono" style={{ fontSize: 'var(--text-xs)' }}>88%</span></div>
-                  <div className="progress"><div className="progress__bar" style={{ width: '88%' }}></div></div>
-                </div>
-                <div className="deck-card__actions">
-                  <a className="btn btn--primary btn--sm grow" href="study">Study</a>
-                  <button className="btn btn--secondary btn--sm">Browse</button>
-                </div>
-              </article>
-
-              <article className="deck-card" style={{ '--deck-color': '#35c99a' }}>
-                <div className="deck-card__top">
-                  <div className="deck-card__emoji">🌐</div>
-                  <div>
-                    <h3 className="deck-card__name">Web APIs & Browser</h3>
-                    <p className="deck-card__meta"><span>25 cards</span> · <span>3 due</span></p>
-                  </div>
-                </div>
-                <p className="deck-card__desc">DOM, events, storage, fetch, observers, and how the browser actually runs your page.</p>
-                <div className="deck-card__progress">
-                  <div className="row-between"><span className="faint" style={{ fontSize: 'var(--text-xs)' }}>Mastery</span><span className="mono" style={{ fontSize: 'var(--text-xs)' }}>41%</span></div>
-                  <div className="progress"><div className="progress__bar" style={{ width: '41%' }}></div></div>
-                </div>
-                <div className="deck-card__actions">
-                  <a className="btn btn--primary btn--sm grow" href="study">Study</a>
-                  <button className="btn btn--secondary btn--sm">Browse</button>
-                </div>
-              </article>
-
-              <article className="deck-card" style={{ '--deck-color': '#f2695c' }}>
-                <div className="deck-card__top">
-                  <div className="deck-card__emoji">🧠</div>
-                  <div>
-                    <h3 className="deck-card__name">CS Foundations</h3>
-                    <p className="deck-card__meta"><span>25 cards</span> · <span className="badge badge--accent">New</span></p>
-                  </div>
-                </div>
-                <p className="deck-card__desc">Big-O, data structures, algorithms, and the vocabulary behind them.</p>
-                <div className="deck-card__progress">
-                  <div className="row-between"><span className="faint" style={{ fontSize: 'var(--text-xs)' }}>Mastery</span><span className="mono" style={{ fontSize: 'var(--text-xs)' }}>0%</span></div>
-                  <div className="progress"><div className="progress__bar" style={{ width: '0%' }}></div></div>
-                </div>
-                <div className="deck-card__actions">
-                  <a className="btn btn--primary btn--sm grow" href="study">Study</a>
-                  <button className="btn btn--secondary btn--sm">Browse</button>
-                </div>
-              </article>
-
-              <article className="deck-card" style={{ '--deck-color': '#f2762e' }}>
-                <div className="deck-card__top">
-                  <div className="deck-card__emoji">🛠️</div>
-                  <div>
-                    <h3 className="deck-card__name">Git & Tooling</h3>
-                    <p className="deck-card__meta"><span>25 cards</span> · <span>6 due</span></p>
-                  </div>
-                </div>
-                <p className="deck-card__desc">Version control day-to-day, plus bundlers, package managers, and the build pipeline.</p>
-                <div className="deck-card__progress">
-                  <div className="row-between"><span className="faint" style={{ fontSize: 'var(--text-xs)' }}>Mastery</span><span className="mono" style={{ fontSize: 'var(--text-xs)' }}>63%</span></div>
-                  <div className="progress"><div className="progress__bar" style={{ width: '63%' }}></div></div>
-                </div>
-                <div className="deck-card__actions">
-                  <a className="btn btn--primary btn--sm grow" href="study">Study</a>
-                  <button className="btn btn--secondary btn--sm">Browse</button>
-                </div>
-              </article>
+                </article>
+              ))}
             </section>
 
             <h3 className="section-title" style={{ marginTop: 'var(--sp-6)' }}>List view (alternative)</h3>
@@ -182,20 +91,15 @@ export default function DecksPage() {
               <div className="deck-row deck-row__head">
                 <span></span><span>Deck</span><span>Cards</span><span>Mastery</span><span>Due</span>
               </div>
-              <div className="deck-row">
-                <span className="deck-card__emoji" style={{ '--deck-color': '#4d9df0' }}>⚛️</span>
-                <span><strong>React Essentials</strong><br /><span className="faint" style={{ fontSize: 'var(--text-xs)' }}>Last studied 2h ago</span></span>
-                <span className="mono">25</span>
-                <span className="progress progress--sm"><span className="progress__bar" style={{ width: '54%', display: 'block', height: '100%' }}></span></span>
-                <span className="badge badge--accent">8 due</span>
-              </div>
-              <div className="deck-row">
-                <span className="deck-card__emoji" style={{ '--deck-color': '#e5b53a' }}>🟨</span>
-                <span><strong>JavaScript Fundamentals</strong><br /><span className="faint" style={{ fontSize: 'var(--text-xs)' }}>Last studied yesterday</span></span>
-                <span className="mono">25</span>
-                <span className="progress progress--sm"><span className="progress__bar" style={{ width: '72%', display: 'block', height: '100%' }}></span></span>
-                <span className="badge badge--accent">4 due</span>
-              </div>
+              {DECKS.map((deck) => (
+                <div className="deck-row">
+                  <span className="deck-card__emoji" style={{ '--deck-color': deck.color }}>⚛️</span>
+                  <span><strong>{deck.name}</strong><br /><span className="faint" style={{ fontSize: 'var(--text-xs)' }}>Last studied 2h ago</span></span>
+                  <span className="mono">25</span>
+                  <span className="progress progress--sm"><span className="progress__bar" style={{ width: '54%', display: 'block', height: '100%' }}></span></span>
+                  <span className="badge badge--accent">8 due</span>
+                </div>
+              ))}
             </section>
 
             <h3 className="section-title" style={{ marginTop: 'var(--sp-6)' }}>Empty state (when a search returns nothing)</h3>

@@ -1,6 +1,31 @@
+import { useState, useEffect } from "react";
 import SideBar from "../components/SideBar.jsx";
+import FLASHCARDS from "../data/flashcards.js";
 
 export default function StudyPage() {
+  const [subjectCards, setCards] = useState(() => 
+    FLASHCARDS.filter((card) => card.deckId === "javascript")
+  );
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isFlipped, setFlipped] = useState(false);
+  const currCard = subjectCards[currentIndex] || null;
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === " ") {
+        setFlipped(!isFlipped);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+
+  }, []);
+
   return (
     <div className="app" data-collapsed="false">
     {<SideBar />}
@@ -58,14 +83,21 @@ export default function StudyPage() {
           >
             <div className="flashcard__inner">
               <div className="flashcard__face flashcard__face--front">
-                <span className="flashcard__tag">hooks</span>
+                {currCard.tags.map((tag) => (
+                  <span className="flashcard__tag">{tag}</span>
+                ))}
 
-                <span className="flashcard__difficulty badge badge--medium">
-                  Medium
+                <span className="flashcard__difficulty badge badge--medium" style={{ textTransform: 'capitalize', 
+                  color: currCard.difficulty === 'easy' ? 'green'
+                       : currCard.difficulty === 'medium' ? 'yellow'
+                       : currCard.difficulty === 'hard' ? 'red'
+                       : 'black'
+                }}>
+                  {currCard.difficulty}
                 </span>
 
                 <p className="flashcard__question">
-                  What does the dependency array of useEffect control?
+                  {currCard.question}
                 </p>
 
                 <span className="flashcard__hint">
@@ -81,10 +113,7 @@ export default function StudyPage() {
                 </span>
 
                 <p className="flashcard__answer">
-                  When the effect re-runs. Omitted means every render,{" "}
-                  <code>[]</code> means once after mount, and a populated
-                  array means whenever one of those values changes between
-                  renders.
+                  {currCard.answer}
                 </p>
 
                 <span className="flashcard__hint">
@@ -92,6 +121,7 @@ export default function StudyPage() {
                 </span>
               </div>
             </div>
+
           </div>
         </div>
 

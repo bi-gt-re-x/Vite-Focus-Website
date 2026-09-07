@@ -9,22 +9,24 @@ export default function StudyPage() {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setFlipped] = useState(false);
-  const currCard = subjectCards[currentIndex] || null;
-
+  const currCard = subjectCards[currentIndex] || null;  
+  
   useEffect(() => {
     const handleKeyDown = (event) => {
-      if (event.key === " ") {
-        setFlipped(!isFlipped);
+      if (event.key === ' ') { 
+        event.preventDefault(); 
+        setFlipped((prev) => !prev); 
       }
     };
 
-    window.addEventListener("keydown", handleKeyDown);
-    
+    window.addEventListener('keydown', handleKeyDown);
+
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener('keydown', handleKeyDown);
     };
 
   }, []);
+
 
   return (
     <div className="app" data-collapsed="false">
@@ -63,81 +65,47 @@ export default function StudyPage() {
               </span>
             </div>
 
-            <span className="study-counter">7 / 25</span>
+            <span className="study-counter">{currentIndex + 1} / 25</span>
           </div>
 
           <div className="progress">
             <div
               className="progress__bar"
-              style={{ width: "28%" }}
+              style={{ width: `${((currentIndex + 1) / 25) * 100}%` }}
             ></div>
           </div>
         </div>
 
-        <div className="card-stack">
-          <div
-            className="flashcard"
-            tabIndex={0}
-            role="button"
-            aria-label="Flashcard, press Enter to flip"
-          >
-            <div className="flashcard__inner">
-              <div className="flashcard__face flashcard__face--front">
-                {currCard.tags.map((tag) => (
-                  <span className="flashcard__tag">{tag}</span>
-                ))}
+        <div className="card-stack"> 
+          <div 
+            className="flashcard" 
+            tabIndex={0} 
+            role="button" 
+            aria-label="Flashcard, press Enter to flip" 
+            onClick={() => setFlipped((prev) => !prev)}
+          > 
+            <div className={`flashcard__inner ${isFlipped ? "flashcard__inner--flipped" : ""}`}> 
 
-                <span className="flashcard__difficulty badge badge--medium" style={{ textTransform: 'capitalize', 
-                  color: currCard.difficulty === 'easy' ? 'green'
-                       : currCard.difficulty === 'medium' ? 'yellow'
-                       : currCard.difficulty === 'hard' ? 'red'
-                       : 'black'
-                }}>
-                  {currCard.difficulty}
-                </span>
+              <div className="flashcard__face flashcard__face--front"> 
+                {currCard.tags?.map((tag, idx) => ( 
+                  <span key={idx} className="flashcard__tag">{tag}</span> 
+                ))} 
+                <span className="flashcard__difficulty badge badge--medium" style={{ textTransform: 'capitalize', color: currCard.difficulty === 'easy' ? 'green' : currCard.difficulty === 'medium' ? 'yellow' : currCard.difficulty === 'hard' ? 'red' : 'black' }}> 
+                  {currCard.difficulty} 
+                </span> 
+                <p className="flashcard__question"> {currCard.question} </p> 
+                <span className="flashcard__hint"> <span className="kbd">Space</span> to flip </span> 
+              </div> 
 
-                <p className="flashcard__question">
-                  {currCard.question}
-                </p>
+              <div className="flashcard__face flashcard__face--back"> 
+                <span className="flashcard__tag">Answer</span> 
+                <span className="flashcard__difficulty badge badge--medium"> Medium </span> 
+                <p className="flashcard__answer"> {currCard.answer} </p> 
+                <span className="flashcard__hint"> How well did you know it? </span> 
+              </div> 
 
-                <span className="flashcard__hint">
-                  <span className="kbd">Space</span> to flip
-                </span>
-              </div>
-
-              <div className="flashcard__face flashcard__face--back">
-                <span className="flashcard__tag">Answer</span>
-
-                <span className="flashcard__difficulty badge badge--medium">
-                  Medium
-                </span>
-
-                <p className="flashcard__answer">
-                  {currCard.answer}
-                </p>
-
-                <span className="flashcard__hint">
-                  How well did you know it?
-                </span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <div
-          className="card"
-          style={{ width: "min(640px, 100%)" }}
-        >
-          <p
-            className="eyebrow"
-            style={{ marginBottom: "var(--sp-3)" }}
-          >
-            Card with a code snippet — back face
-          </p>
-
-          <pre className="flashcard__code">
-          </pre>
+            </div> 
+          </div> 
         </div>
 
         <div className="grade-row">
@@ -166,17 +134,25 @@ export default function StudyPage() {
           <button
             className="btn btn--secondary btn--icon"
             aria-label="Previous card"
+            onClick={() => {
+              if (currentIndex != 0) {setCurrentIndex(currentIndex - 1)};
+            }}
           >
             ←
           </button>
 
-          <button className="btn btn--secondary">
+          <button className="btn btn--secondary" onClick={ () => {
+            setFlipped((prev) => !prev); 
+          }}>
             Flip card
           </button>
 
           <button
             className="btn btn--secondary btn--icon"
             aria-label="Next card"
+            onClick={() => {
+              if (currentIndex != 25) {setCurrentIndex(currentIndex + 1)};
+            }}
           >
             →
           </button>

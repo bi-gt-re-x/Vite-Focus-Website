@@ -1,10 +1,17 @@
 import { useState, useEffect } from "react";
+import { useParams, useSearchParams } from "react-router-dom";
 import SideBar from "../components/SideBar.jsx";
 import FLASHCARDS from "../data/flashcards.js";
 
 export default function StudyPage() {
+  const { deckId } = useParams();
+  const [searchParams] = useSearchParams();
+
+  const emoji = searchParams.get("emoji");
+  const name = searchParams.get("name");
+
   const [subjectCards, setCards] = useState(() => 
-    FLASHCARDS.filter((card) => card.deckId === "javascript")
+    FLASHCARDS.filter((card) => card.deckId === deckId)
   );
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -61,7 +68,7 @@ export default function StudyPage() {
               </a>
 
               <span className="badge badge--accent">
-                ⚛️ React Essentials
+                {emoji} {name}
               </span>
             </div>
 
@@ -135,6 +142,7 @@ export default function StudyPage() {
             className="btn btn--secondary btn--icon"
             aria-label="Previous card"
             onClick={() => {
+              if (isFlipped === true) {setFlipped(false)};
               if (currentIndex != 0) {setCurrentIndex(currentIndex - 1)};
             }}
           >
@@ -151,6 +159,7 @@ export default function StudyPage() {
             className="btn btn--secondary btn--icon"
             aria-label="Next card"
             onClick={() => {
+              if (isFlipped === true) {setFlipped(false)};
               if (currentIndex != 25) {setCurrentIndex(currentIndex + 1)};
             }}
           >

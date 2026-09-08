@@ -1,4 +1,5 @@
 import { DECKS } from "../data/decks.js";
+import { Link } from "react-router-dom";
 import SideBar from '../components/SideBar.jsx';
 
 export default function DecksPage() {
@@ -68,7 +69,12 @@ export default function DecksPage() {
                     <div className="progress"><div className="progress__bar" style={{ width: '72%' }}></div></div>
                   </div>
                   <div className="deck-card__actions">
-                    <a className="btn btn--primary btn--sm grow" href="/study">Study</a>
+                    <Link
+                      className="btn btn--primary btn--sm grow"
+                      to={`/study/${encodeURIComponent(deck.id)}?emoji=${encodeURIComponent(deck.emoji)}&name=${encodeURIComponent(deck.name)}`}
+                    >
+                      Study
+                    </Link>
                     <button className="btn btn--secondary btn--sm">Browse</button>
                   </div>
                 </article>

@@ -13,13 +13,19 @@ export default function App() {
     return savedLink ? JSON.parse(savedLink) : '/study/javascript?emoji=🟨&name=JavaScript%20Fundamentals';
   });
 
+  const [deckMastery, setDeckMastery] = useState(() => {
+    const savedMastery = localStorage.getItem('deckMastery');
+    return savedMastery ? JSON.parse(savedMastery) 
+    : [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  });
+
   useEffect(() => {
     localStorage.setItem('studyLink', JSON.stringify(activeLink));
   }, [activeLink]);
 
   return (
     <Routes>
-      <Route path="/decks" element={<DecksPage setActiveLink={setActiveLink} activeLink={activeLink} />}/>
+      <Route path="/decks" element={<DecksPage setActiveLink={setActiveLink} activeLink={activeLink} deckMastery={deckMastery} setDeckMastery={setDeckMastery} />} />
       <Route path="/timer" element={<TimerPage  activeLink={activeLink}  />}/>
       <Route path="/study/:deckId" element={<StudyPage activeLink={activeLink} />} />
       <Route path="/stats" element={<StatsPage activeLink={activeLink}  />} />

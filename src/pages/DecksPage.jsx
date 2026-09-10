@@ -2,7 +2,9 @@ import { DECKS } from "../data/decks.js";
 import { Link } from "react-router-dom";
 import SideBar from '../components/SideBar.jsx';
 
-export default function DecksPage({ setActiveLink, activeLink }) {
+export default function DecksPage({ setActiveLink, activeLink, deckMastery, setDeckMastery }) {
+  let loopIndex = -1;
+
   return (
       <div className="app" data-collapsed="false">
         {<SideBar activeStudyLink={activeLink} />}
@@ -44,58 +46,68 @@ export default function DecksPage({ setActiveLink, activeLink }) {
               </select>
             </div>
 
-            <div className="chip-row">
-              <button className="chip chip--active">All tags</button>
-              <button className="chip">hooks</button>
-              <button className="chip">async</button>
-              <button className="chip">layout</button>
-              <button className="chip">complexity</button>
-              <button className="chip">workflow</button>
-            </div>
-
             <section className="deck-grid">
-              {DECKS.map((deck) => (
-                <article className="deck-card" style={{ '--deck-color': deck.color }}>
-                  <div className="deck-card__top">
-                    <div className="deck-card__emoji">{deck.emoji}</div>
-                    <div>
-                      <h3 className="deck-card__name">{deck.name}</h3>
-                      <p className="deck-card__meta"><span>25 cards</span> · <span>4 due</span></p>
+              {DECKS.map((deck) => {
+                loopIndex += 1;
+
+                return (
+                  <article className="deck-card" style={{ '--deck-color': deck.color }}>
+                    <div className="deck-card__top">
+                      <div className="deck-card__emoji">{deck.emoji}</div>
+                      <div>
+                        <h3 className="deck-card__name">{deck.name}</h3>
+                        <p className="deck-card__meta"><span>25 cards</span> · <span>4 due</span></p>
+                      </div>
                     </div>
-                  </div>
-                  <p className="deck-card__desc">{deck.description}</p>
-                  <div className="deck-card__progress">
-                    <div className="row-between"><span className="faint" style={{ fontSize: 'var(--text-xs)' }}>Mastery</span><span className="mono" style={{ fontSize: 'var(--text-xs)' }}>72%</span></div>
-                    <div className="progress"><div className="progress__bar" style={{ width: '72%' }}></div></div>
-                  </div>
-                  <div className="deck-card__actions">
-                    <Link
-                      className="btn btn--primary btn--sm grow"
-                      to={`/study/${encodeURIComponent(deck.id)}?emoji=${encodeURIComponent(deck.emoji)}&name=${encodeURIComponent(deck.name)}`}
-                      onClick={() => {setActiveLink(`/study/${encodeURIComponent(deck.id)}?emoji=${encodeURIComponent(deck.emoji)}&name=${encodeURIComponent(deck.name)}`)}}
-                    >
-                      Study
-                    </Link>
-                    <button className="btn btn--secondary btn--sm">Browse</button>
-                  </div>
-                </article>
-              ))}
+                    <p className="deck-card__desc">{deck.description}</p>
+                    <div className="deck-card__progress">
+                      <div className="row-between"><span className="faint" style={{ fontSize: 'var(--text-xs)' }}>Mastery</span><span className="mono" style={{ fontSize: 'var(--text-xs)' }}>{`${deckMastery[loopIndex]}`  }</span></div>
+                      <div className="progress"><div className="progress__bar" style={{ width: `${deckMastery[loopIndex]}` }}></div></div>
+                    </div>
+                    <div className="deck-card__actions">
+                      <Link
+                        className="btn btn--primary btn--sm grow"
+                        to={`/study/${encodeURIComponent(deck.id)}?emoji=${encodeURIComponent(deck.emoji)}&name=${encodeURIComponent(deck.name)}`}
+                        onClick={() => {setActiveLink(`/study/${encodeURIComponent(deck.id)}?emoji=${encodeURIComponent(deck.emoji)}&name=${encodeURIComponent(deck.name)}`)}}
+                      >
+                        Study
+                      </Link>
+                      <button className="btn btn--secondary btn--sm">Browse</button>
+                    </div>
+                  </article>
+                );
+              })}
             </section>
+
+            {() => {loopIndex = 0;}}
 
             <h3 className="section-title" style={{ marginTop: 'var(--sp-6)' }}>List view (alternative)</h3>
             <section className="deck-list">
               <div className="deck-row deck-row__head">
                 <span></span><span>Deck</span><span>Cards</span><span>Mastery</span><span>Due</span>
               </div>
-              {DECKS.map((deck) => (
-                <div className="deck-row">
-                  <span className="deck-card__emoji" style={{ '--deck-color': deck.color }}>⚛️</span>
-                  <span><strong>{deck.name}</strong><br /><span className="faint" style={{ fontSize: 'var(--text-xs)' }}>Last studied 2h ago</span></span>
-                  <span className="mono">25</span>
-                  <span className="progress progress--sm"><span className="progress__bar" style={{ width: '54%', display: 'block', height: '100%' }}></span></span>
-                  <span className="badge badge--accent">8 due</span>
-                </div>
-              ))}
+              {DECKS.map((deck) => {
+                loopIndex += 1;
+                let dueItems = 0;
+
+                if (deckMastery[loopIndex] > 0) {
+                  dueItems = 25 - (deckMastery[loopIndex] / 4);
+                }
+
+                else {
+                  dueItems = 0;
+                }
+
+                return (
+                  <div className="deck-row">
+                    <span className="deck-card__emoji" style={{ '--deck-color': deck.color }}>{deck.emoji}</span>
+                    <span><strong>{deck.name}</strong><br /><span className="faint" style={{ fontSize: 'var(--text-xs)' }}>Last studied 2h ago</span></span>
+                    <span className="mono">25</span>
+                    <span className="progress progress--sm"><span className="progress__bar" style={{ width: `${deckMastery[loopIndex]}`, display: 'block', height: '100%' }}></span></span>
+                    <span className="badge badge--accent">{dueItems} due</span>
+                  </div>
+                )
+              })}
             </section>
 
             <h3 className="section-title" style={{ marginTop: 'var(--sp-6)' }}>Empty state (when a search returns nothing)</h3>

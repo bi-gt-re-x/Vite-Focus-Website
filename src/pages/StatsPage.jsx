@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import SideBar from "../components/SideBar.jsx";
 
-export default function StatsPage() {
+export default function StatsPage({ activeLink }) {
   return (
     <div className="app" data-collapsed="false">
-      {<SideBar />}
+      {<SideBar activeStudyLink={activeLink} />}
 
       <div className="app__main">
         <header className="topbar">

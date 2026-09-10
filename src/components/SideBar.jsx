@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-export default function SideBar() {
+export default function SideBar({ activeStudyLink }) {
     const linkClass = ({ isActive }) =>
         "nav-link" + (isActive ? " nav-link--active" : "");
 
@@ -61,7 +61,7 @@ export default function SideBar() {
                 <span className="nav-link__badge">6</span>
             </NavLink>
 
-            <NavLink className={linkClass} to="/study" data-page="study">
+            <NavLink className={linkClass} to={activeStudyLink} data-page="study">
                 <svg
                 className="nav-link__icon"
                 viewBox="0 0 24 24"

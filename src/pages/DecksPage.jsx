@@ -2,10 +2,10 @@ import { DECKS } from "../data/decks.js";
 import { Link } from "react-router-dom";
 import SideBar from '../components/SideBar.jsx';
 
-export default function DecksPage() {
+export default function DecksPage({ setActiveLink, activeLink }) {
   return (
       <div className="app" data-collapsed="false">
-        {<SideBar />}
+        {<SideBar activeStudyLink={activeLink} />}
 
         <div className="app__main">
           <header className="topbar">
@@ -72,6 +72,7 @@ export default function DecksPage() {
                     <Link
                       className="btn btn--primary btn--sm grow"
                       to={`/study/${encodeURIComponent(deck.id)}?emoji=${encodeURIComponent(deck.emoji)}&name=${encodeURIComponent(deck.name)}`}
+                      onClick={() => {setActiveLink(`/study/${encodeURIComponent(deck.id)}?emoji=${encodeURIComponent(deck.emoji)}&name=${encodeURIComponent(deck.name)}`)}}
                     >
                       Study
                     </Link>

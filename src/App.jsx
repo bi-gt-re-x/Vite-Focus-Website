@@ -4,24 +4,27 @@ import TimerPage from './pages/TimerPage.jsx';
 import StudyPage from './pages/StudyPage.jsx';
 import StatsPage from './pages/StatsPage.jsx';
 import SettingsPage from './pages/SettingsPage.jsx';
-import { Routes, Route, useSearchParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 export default function App() {
-  const [searchParams] = useSearchParams();
+  const [activeLink, setActiveLink] = useState(() => {
+    const savedLink = localStorage.getItem('studyLink');
+    return savedLink ? JSON.parse(savedLink) : '/study/javascript?emoji=🟨&name=JavaScript%20Fundamentals';
+  });
 
   useEffect(() => {
-    const deckId = useSearchParams.get("deckId");
-  }, [searchParams]);
+    localStorage.setItem('studyLink', JSON.stringify(activeLink));
+  }, [activeLink]);
 
   return (
     <Routes>
-      <Route path="/decks" element={<DecksPage />} />
-      <Route path="/timer" element={<TimerPage />} />
-      <Route path="/study/:deckId" element={<StudyPage />} />
-      <Route path="/stats" element={<StatsPage />} />
-      <Route path="/settings" element={<SettingsPage />} />
-      <Route index element={<HomePage />} />
+      <Route path="/decks" element={<DecksPage setActiveLink={setActiveLink} activeLink={activeLink} />}/>
+      <Route path="/timer" element={<TimerPage  activeLink={activeLink}  />}/>
+      <Route path="/study/:deckId" element={<StudyPage activeLink={activeLink} />} />
+      <Route path="/stats" element={<StatsPage activeLink={activeLink}  />} />
+      <Route path="/settings" element={<SettingsPage activeLink={activeLink}  />} />
+      <Route index element={<HomePage activeLink={activeLink}  />}/>
     </Routes>
   )
 }

@@ -1,9 +1,9 @@
 import SideBar from '../components/SideBar.jsx';
 
-export default function TimerPage() {
+export default function TimerPage({ activeLink }) {
   return (
     <div className="app" data-collapsed="false">
-      {<SideBar />}
+      {<SideBar activeStudyLink={activeLink}/>}
 
       <div className="app__main">
         <header className="topbar">

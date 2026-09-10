@@ -3,7 +3,7 @@ import { useParams, useSearchParams } from "react-router-dom";
 import SideBar from "../components/SideBar.jsx";
 import FLASHCARDS from "../data/flashcards.js";
 
-export default function StudyPage({ activeLink }) {
+export default function StudyPage({ activeLink, deckMastery, deckName }) {
   const { deckId } = useParams();
   const [searchParams] = useSearchParams();
 
@@ -33,6 +33,13 @@ export default function StudyPage({ activeLink }) {
     };
 
   }, []);
+
+  if (deckName === 'javascript') {const index = 0};
+  if (deckName === 'react') {const index = 1};
+  if (deckName === 'css') {const index = 2};
+  if (deckName === 'webapi') {const index = 3};
+  if (deckName === 'cs') {const index = 4};
+  if (deckName === 'git') {const index = 5};
 
 
   return (

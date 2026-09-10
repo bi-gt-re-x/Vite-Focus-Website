@@ -13,6 +13,11 @@ export default function App() {
     return savedLink ? JSON.parse(savedLink) : '/study/javascript?emoji=🟨&name=JavaScript%20Fundamentals';
   });
 
+  const [deckId, setDeckId] = useState(() => {
+    const deckId = localStorage.getItem('deckId');
+    return deckId ? JSON.parse(deckId) : 'javascript';
+  });
+
   const [deckMastery, setDeckMastery] = useState(() => {
     const savedMastery = localStorage.getItem('deckMastery');
     return savedMastery ? JSON.parse(savedMastery) 
@@ -20,14 +25,22 @@ export default function App() {
   });
 
   useEffect(() => {
+    localStorage.setItem('deckMastery', JSON.stringify(deckMastery));
+  }, [deckMastery])
+
+  useEffect(() => {
     localStorage.setItem('studyLink', JSON.stringify(activeLink));
   }, [activeLink]);
 
+  useEffect(() => {
+    localStorage.setItem('deckId', JSON.stringify(deckId));
+  }, [deckId]);
+
   return (
     <Routes>
-      <Route path="/decks" element={<DecksPage setActiveLink={setActiveLink} activeLink={activeLink} deckMastery={deckMastery} setDeckMastery={setDeckMastery} />} />
-      <Route path="/timer" element={<TimerPage  activeLink={activeLink}  />}/>
-      <Route path="/study/:deckId" element={<StudyPage activeLink={activeLink} />} />
+      <Route path="/decks" element={<DecksPage setActiveLink={setActiveLink} activeLink={activeLink} deckMastery={deckMastery} setDeckId={setDeckId} />} />
+      <Route path="/timer" element={<TimerPage  activeLink={activeLink} />}/>
+      <Route path="/study/:deckId" element={<StudyPage activeLink={activeLink} deckMastery={deckMastery} deckName={deckId} />} />
       <Route path="/stats" element={<StatsPage activeLink={activeLink}  />} />
       <Route path="/settings" element={<SettingsPage activeLink={activeLink}  />} />
       <Route index element={<HomePage activeLink={activeLink}  />}/>

@@ -2,7 +2,7 @@ import { DECKS } from "../data/decks.js";
 import { Link } from "react-router-dom";
 import SideBar from '../components/SideBar.jsx';
 
-export default function DecksPage({ setActiveLink, activeLink, deckMastery, setDeckMastery }) {
+export default function DecksPage({ setActiveLink, activeLink, deckMastery, setDeckId }) {
   let loopIndex = -1;
 
   return (
@@ -68,7 +68,10 @@ export default function DecksPage({ setActiveLink, activeLink, deckMastery, setD
                       <Link
                         className="btn btn--primary btn--sm grow"
                         to={`/study/${encodeURIComponent(deck.id)}?emoji=${encodeURIComponent(deck.emoji)}&name=${encodeURIComponent(deck.name)}`}
-                        onClick={() => {setActiveLink(`/study/${encodeURIComponent(deck.id)}?emoji=${encodeURIComponent(deck.emoji)}&name=${encodeURIComponent(deck.name)}`)}}
+                        onClick={() => {
+                          setActiveLink(`/study/${encodeURIComponent(deck.id)}?emoji=${encodeURIComponent(deck.emoji)}&name=${encodeURIComponent(deck.name)}`);
+                          setDeckId(deck.id);
+                        }}
                       >
                         Study
                       </Link>

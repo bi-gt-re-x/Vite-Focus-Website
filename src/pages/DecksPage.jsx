@@ -62,7 +62,7 @@ export default function DecksPage({ setActiveLink, activeLink, deckMastery, setD
                     <p className="deck-card__desc">{deck.description}</p>
                     <div className="deck-card__progress">
                       <div className="row-between"><span className="faint" style={{ fontSize: 'var(--text-xs)' }}>Mastery</span><span className="mono" style={{ fontSize: 'var(--text-xs)' }}>{`${deckMastery[loopIndex]}`  }</span></div>
-                      <div className="progress"><div className="progress__bar" style={{ width: `${deckMastery[loopIndex]}` }}></div></div>
+                      <div className="progress"><div className="progress__bar" style={{ width: `${(deckMastery[loopIndex] * 4)}%`}}></div></div>
                     </div>
                     <div className="deck-card__actions">
                       <Link

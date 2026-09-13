@@ -16,7 +16,10 @@ export default function StudyPage({ activeLink, deckMastery, deckName }) {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setFlipped] = useState(false);
-  const currCard = subjectCards[currentIndex] || null;  
+  const currCard = subjectCards[currentIndex] || null;
+  const [isRated, setisRated] = useState(false);
+  
+  let index = 0;
   
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -34,12 +37,12 @@ export default function StudyPage({ activeLink, deckMastery, deckName }) {
 
   }, []);
 
-  if (deckName === 'javascript') {const index = 0};
-  if (deckName === 'react') {const index = 1};
-  if (deckName === 'css') {const index = 2};
-  if (deckName === 'webapi') {const index = 3};
-  if (deckName === 'cs') {const index = 4};
-  if (deckName === 'git') {const index = 5};
+  if (deckName === 'javascript') {index = 0};
+  if (deckName === 'react') {index = 1};
+  if (deckName === 'css') {index = 2};
+  if (deckName === 'webapi') {index = 3};
+  if (deckName === 'cs') {index = 4};
+  if (deckName === 'git') {index = 5};
 
 
   return (
@@ -123,24 +126,37 @@ export default function StudyPage({ activeLink, deckMastery, deckName }) {
         </div>
 
         <div className="grade-row">
-          <button className="grade-btn grade-btn--again">
-            Again
-            <small>&lt; 1 min</small>
+          <button className="grade-btn grade-btn--again" style={{ opacity: isRated ? 0.6 : 1 }} onClick={() => {
+            if (isRated === false) {setisRated(true);}
+          }}>
+            Wrong
           </button>
 
-          <button className="grade-btn grade-btn--hard">
+          <button className="grade-btn grade-btn--hard" style={{ opacity: isRated ? 0.6 : 1 }} onClick={() => {
+            if (isRated === false) {
+              deckMastery[index] += 1;
+              setisRated(true);
+            }
+          }}>
             Hard
-            <small>6 min</small>
           </button>
 
-          <button className="grade-btn grade-btn--good">
+          <button className="grade-btn grade-btn--good" style={{ opacity: isRated ? 0.6 : 1 }} onClick={() => {
+            if (isRated === false) {
+              deckMastery[index] += 1;
+              setisRated(true);
+            }
+          }}>
             Good
-            <small>1 day</small>
           </button>
 
-          <button className="grade-btn grade-btn--easy">
+          <button className="grade-btn grade-btn--easy" style={{ opacity: isRated ? 0.6 : 1 }} onClick={() => {
+            if (isRated === false) {
+              deckMastery[index] += 1;
+              setisRated(true);
+            } 
+          }}>
             Easy
-            <small>4 days</small>
           </button>
         </div>
 
@@ -166,6 +182,7 @@ export default function StudyPage({ activeLink, deckMastery, deckName }) {
             className="btn btn--secondary btn--icon"
             aria-label="Next card"
             onClick={() => {
+              setisRated(false);
               if (isFlipped === true) {setFlipped(false)};
               if (currentIndex != 25) {setCurrentIndex(currentIndex + 1)};
             }}

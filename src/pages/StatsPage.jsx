@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import SideBar from "../components/SideBar.jsx";
+import SideBar from "../components/layout/SideBar.jsx";
+import Topbar from "../components/layout/Topbar.jsx";
 
 export default function StatsPage({ activeLink }) {
   return (
@@ -7,6 +8,7 @@ export default function StatsPage({ activeLink }) {
       {<SideBar activeStudyLink={activeLink} />}
 
       <div className="app__main">
+        {<Topbar title="Stats" />}
         <header className="topbar">
           <h1 className="topbar__title">Stats</h1>
 

@@ -1,4 +1,5 @@
-import SideBar from '../components/SideBar.jsx';
+import SideBar from '../components/layout/SideBar.jsx';
+import Topbar from '../components/layout/Topbar.jsx';
 
 export default function HomePage({ activeLink }) {
   return (
@@ -6,25 +7,7 @@ export default function HomePage({ activeLink }) {
       {<SideBar activeStudyLink={activeLink} />}
 
       <div className="app__main">
-        <header className="topbar">
-          <h1 className="topbar__title">Home</h1>
-
-          <div className="topbar__actions">
-            <div className="topbar__mini-timer" data-running="true">
-              <span className="topbar__mini-dot"></span>
-              <span>18:42</span>
-            </div>
-
-            <button
-              className="btn btn--ghost btn--icon tooltip"
-              data-tip="Toggle theme"
-              aria-label="Toggle theme"
-            >
-              🌙
-            </button>
-          </div>
-        </header>
-
+        {<Topbar title='Home' />}
         <main className="content">
           <section className="hero">
             <div>

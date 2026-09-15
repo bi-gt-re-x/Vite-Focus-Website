@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
-import SideBar from "../components/SideBar.jsx";
+import SideBar from "../components/layout/SideBar.jsx";
 import GradeButtons from "../components/study/GradeButtons.jsx";
 import SessionSummary from "../components/study/SessionSummary.jsx";
+import Topbar from "../components/layout/Topbar.jsx";
 import Flashcard from "../components/study/Flashcard.jsx";
 import FLASHCARDS from "../data/flashcards.js";
 
@@ -68,6 +69,7 @@ export default function StudyPage({ activeLink, deckMastery, deckName }) {
       {<SideBar activeStudyLink={activeLink} />}
 
       <div className="app__main">
+        {<Topbar title="Stats" />}
         <header className="topbar">
           <h1 className="topbar__title">Study</h1>
 

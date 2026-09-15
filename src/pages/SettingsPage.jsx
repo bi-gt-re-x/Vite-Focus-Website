@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import SideBar from '../components/SideBar.jsx';
+import SideBar from '../components/layout/SideBar.jsx';
+import Topbar from "../components/layout/Topbar.jsx";
 import { THEMES } from "../data/themes";
 
 export default function SettingsPage({ activeLink }) {
@@ -8,6 +9,7 @@ export default function SettingsPage({ activeLink }) {
       <SideBar activeStudyLink={activeLink} />
 
       <div className="app__main">
+        {<Topbar title="Settings" />}
         <header className="topbar">
           <h1 className="topbar__title">Settings</h1>
 

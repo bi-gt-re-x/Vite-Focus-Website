@@ -1,7 +1,27 @@
 import SideBar from '../components/layout/SideBar.jsx';
 import Topbar from '../components/layout/Topbar.jsx';
+import { useState, useEffect } from 'react';
+import dayjs from 'dayjs';
+import duration from "dayjs/plugin/duration";
 
 export default function TimerPage({ activeLink }) {
+  const [timeLeft, setTimeLeft] = useState(1800);
+  const [paused, setPaused] = useState(false);
+  dayjs.extend(duration);
+
+  useEffect(() => {
+    if (timeLeft <= 0) return;
+
+    if (paused === false) {
+      const timer = setInterval(() => {
+        setTimeLeft(prev => prev - 1);
+      }, 1000);
+
+      return () => clearInterval(timer);  
+    }
+
+  }, [timeLeft]);
+
   return (
     <div className="app" data-collapsed="false">
       {<SideBar activeStudyLink={activeLink}/>}
@@ -49,7 +69,6 @@ export default function TimerPage({ activeLink }) {
             <input
               className="timer-task__input"
               placeholder="What are you working on?"
-              defaultValue="Finish the study page"
             />
           </div>
 
@@ -84,7 +103,7 @@ export default function TimerPage({ activeLink }) {
                 role="timer"
                 aria-live="off"
               >
-                18:42
+                {dayjs.duration(timeLeft, "seconds").format("mm:ss")}
               </span>
 
               <span className="dial__label">Focus</span>
@@ -110,6 +129,9 @@ export default function TimerPage({ activeLink }) {
               className="timer-controls__side tooltip"
               data-tip="Reset"
               aria-label="Reset timer"
+              onClick={() => {
+                setTimeLeft(1800);
+              }}
             >
               <svg
                 viewBox="0 0 24 24"
@@ -126,6 +148,9 @@ export default function TimerPage({ activeLink }) {
             <button
               className="timer-controls__main"
               aria-label="Pause timer"
+              onClick={() => {
+                setPaused(!paused);
+              }}
             >
               <svg viewBox="0 0 24 24" fill="currentColor">
                 <rect x="7" y="5" width="4" height="14" rx="1" />

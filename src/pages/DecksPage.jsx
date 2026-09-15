@@ -1,22 +1,18 @@
 import { DECKS } from "../data/decks.js";
 import { Link } from "react-router-dom";
-import SideBar from '../components/SideBar.jsx';
+import SideBar from '../components/layout/SideBar.jsx';
+import Topbar from "../components/layout/Topbar.jsx";
 
 export default function DecksPage({ setActiveLink, activeLink, deckMastery, setDeckId }) {
   let loopIndex = -1;
+  let listLoopIndex = -1;
 
   return (
       <div className="app" data-collapsed="false">
         {<SideBar activeStudyLink={activeLink} />}
 
         <div className="app__main">
-          <header className="topbar">
-            <h1 className="topbar__title">Decks</h1>
-            <div className="topbar__actions">
-              <div className="topbar__mini-timer" data-running="true"><span className="topbar__mini-dot"></span><span>18:42</span></div>
-              <button className="btn btn--ghost btn--icon tooltip" data-tip="Toggle theme" aria-label="Toggle theme">🌙</button>
-            </div>
-          </header>
+          {<Topbar title='Decks' />}
           <main className="content">
             <div className="page-header">
               <div className="page-header__row">
@@ -51,7 +47,7 @@ export default function DecksPage({ setActiveLink, activeLink, deckMastery, setD
                 loopIndex += 1;
 
                 return (
-                  <article className="deck-card" style={{ '--deck-color': deck.color }}>
+                  <article className="deck-card" style={{ '--deck-color': deck.color }} key={deck.id}>
                     <div className="deck-card__top">
                       <div className="deck-card__emoji">{deck.emoji}</div>
                       <div>
@@ -82,19 +78,17 @@ export default function DecksPage({ setActiveLink, activeLink, deckMastery, setD
               })}
             </section>
 
-            {() => {loopIndex = 0;}}
-
             <h3 className="section-title" style={{ marginTop: 'var(--sp-6)' }}>List view (alternative)</h3>
-            <section className="deck-list">
+            <section className="deck-list"> 
               <div className="deck-row deck-row__head">
                 <span></span><span>Deck</span><span>Cards</span><span>Mastery</span><span>Due</span>
               </div>
               {DECKS.map((deck) => {
-                loopIndex += 1;
+                listLoopIndex += 1;
                 let dueItems = 0;
 
-                if (deckMastery[loopIndex] > 0) {
-                  dueItems = 25 - (deckMastery[loopIndex] / 4);
+                if (deckMastery[listLoopIndex] > 0) {
+                  dueItems = 25 - (deckMastery[listLoopIndex] / 4);
                 }
 
                 else {
@@ -102,11 +96,11 @@ export default function DecksPage({ setActiveLink, activeLink, deckMastery, setD
                 }
 
                 return (
-                  <div className="deck-row">
+                  <div className="deck-row" key={deck.id}>
                     <span className="deck-card__emoji" style={{ '--deck-color': deck.color }}>{deck.emoji}</span>
                     <span><strong>{deck.name}</strong><br /><span className="faint" style={{ fontSize: 'var(--text-xs)' }}>Last studied 2h ago</span></span>
                     <span className="mono">25</span>
-                    <span className="progress progress--sm"><span className="progress__bar" style={{ width: `${deckMastery[loopIndex]}`, display: 'block', height: '100%' }}></span></span>
+                    <span className="progress progress--sm"><span className="progress__bar" style={{ width: `${(deckMastery[listLoopIndex] * 4)}%`, display: 'block', height: '100%' }}></span></span>
                     <span className="badge badge--accent">{dueItems} due</span>
                   </div>
                 )

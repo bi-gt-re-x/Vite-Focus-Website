@@ -9,17 +9,7 @@ export default function TimerPage({ activeLink }) {
   const [paused, setPaused] = useState(true);
   dayjs.extend(duration);
 
-  useEffect(() => {
-    if (paused || timeLeft <= 0) return;
-
-    const timer = setInterval(() => {
-      setTimeLeft(prev => prev - 1);
-    }, 1000);
-
-    return () => clearInterval(timer);  
-  }, [paused, timeLeft]); 
-
-  const radius = 46;
+  const radius = 44;
   const circumfrence = 2 * Math.PI * radius;
   const [strokeDashoffset, setOffSet] = useState(0);
 
@@ -38,6 +28,46 @@ export default function TimerPage({ activeLink }) {
       setOffSet(circumfrence * (1 - percentageLeft));
     }
   }, [timeLeft, circumfrence]);
+
+  useEffect(() => {
+    if (paused || timeLeft <= 0) return;
+
+    const timer = setInterval(() => {
+      setTimeLeft(prev => prev - 1);
+    }, 1000);
+
+    return () => clearInterval(timer);  
+  }, [paused, timeLeft]); 
+
+  // Shortcut Section is Down here {6^7} all the useEffects
+
+  useEffect(() => {
+    const handleSpaceDown = (event) => {
+      if (event.key === ' ') {
+        setPaused(!paused);
+      }
+    };
+
+    window.addEventListener('keydown', handleSpaceDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleSpaceDown);
+    };
+  }, [paused]);
+
+  useEffect(() => {
+    const handleResetDown = (event) => {
+      if (event.key === 'r') {
+        setTimeLeft(1800);
+      };
+    };
+
+    window.addEventListener('keydown', handleResetDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleResetDown);
+    };
+  }, [timeLeft]);
 
   return (
     <div className="app" data-collapsed="false">

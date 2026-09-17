@@ -27,7 +27,7 @@
 
 .dial {
   position: relative;
-  width: min(360px, 82vw);
+  width: min(360px, calc(100% - var(--sp-8)));
   aspect-ratio: 1;
   display: grid;
   place-items: center;

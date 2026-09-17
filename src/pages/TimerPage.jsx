@@ -6,21 +6,38 @@ import duration from "dayjs/plugin/duration";
 
 export default function TimerPage({ activeLink }) {
   const [timeLeft, setTimeLeft] = useState(1800);
-  const [paused, setPaused] = useState(false);
+  const [paused, setPaused] = useState(true);
   dayjs.extend(duration);
 
   useEffect(() => {
-    if (timeLeft <= 0) return;
+    if (paused || timeLeft <= 0) return;
 
-    if (paused === false) {
-      const timer = setInterval(() => {
-        setTimeLeft(prev => prev - 1);
-      }, 1000);
+    const timer = setInterval(() => {
+      setTimeLeft(prev => prev - 1);
+    }, 1000);
 
-      return () => clearInterval(timer);  
+    return () => clearInterval(timer);  
+  }, [paused, timeLeft]); 
+
+  const radius = 46;
+  const circumfrence = 2 * Math.PI * radius;
+  const [strokeDashoffset, setOffSet] = useState(0);
+
+  useEffect(() => {
+
+    if (timeLeft === 1800) {
+      setOffSet(circumfrence);
+    } 
+
+    else if (timeLeft === 0) {
+      setOffSet(0);
+    } 
+
+    else {
+      const percentageLeft = timeLeft / 1800;
+      setOffSet(circumfrence * (1 - percentageLeft));
     }
-
-  }, [timeLeft]);
+  }, [timeLeft, circumfrence]);
 
   return (
     <div className="app" data-collapsed="false">
@@ -82,16 +99,17 @@ export default function TimerPage({ activeLink }) {
                 className="dial__track"
                 cx="50"
                 cy="50"
-                r="46"
+                r={radius}
               />
 
               <circle
                 className="dial__progress"
                 cx="50"
                 cy="50"
-                r="46"
-                strokeDasharray="289.03"
-                strokeDashoffset="86.7"
+                r={radius}
+                strokeDasharray={circumfrence}
+                strokeDashoffset={strokeDashoffset}
+                style={{ transition: 'stroke-dashoffset 1s linear' }}
               />
             </svg>
 
@@ -152,10 +170,16 @@ export default function TimerPage({ activeLink }) {
                 setPaused(!paused);
               }}
             >
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <rect x="7" y="5" width="4" height="14" rx="1" />
-                <rect x="13" y="5" width="4" height="14" rx="1" />
-              </svg>
+              {paused ? (
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              ) : (
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <rect x="7" y="5" width="4" height="14" rx="1" />
+                  <rect x="13" y="5" width="4" height="14" rx="1" />
+                </svg>
+              )}
             </button>
 
             <button

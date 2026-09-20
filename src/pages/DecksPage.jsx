@@ -1,123 +1,97 @@
 import { DECKS } from "../data/decks.js";
 import { Link } from "react-router-dom";
-import SideBar from '../components/layout/SideBar.jsx';
+import SideBar from "../components/layout/SideBar.jsx";
 import Topbar from "../components/layout/Topbar.jsx";
+import { DeckView } from "../components/decks/DeckView.jsx";
+import { ListView } from "../components/decks/ListView.jsx";
+import { SearchState } from "../components/decks/SearchState.jsx";
 
-export default function DecksPage({ setActiveLink, activeLink, deckMastery, setDeckId }) {
+export default function DecksPage({
+  setActiveLink,
+  activeLink,
+  deckMastery,
+  setDeckId,
+}) {
   let loopIndex = -1;
   let listLoopIndex = -1;
+  const search = false;
 
   return (
-      <div className="app" data-collapsed="false">
-        {<SideBar activeStudyLink={activeLink} />}
+    <div className="app" data-collapsed="false">
+      {<SideBar activeStudyLink={activeLink} />}
 
-        <div className="app__main">
-          {<Topbar title='Decks' />}
-          <main className="content">
-            <div className="page-header">
-              <div className="page-header__row">
-                <div>
-                  <p className="eyebrow">Library</p>
-                  <h2 className="page-title">Decks</h2>
-                </div>
-                <button className="btn btn--primary">+ New deck</button>
+      <div className="app__main">
+        {<Topbar title="Decks" />}
+        <main className="content">
+          <div className="page-header">
+            <div className="page-header__row">
+              <div>
+                <p className="eyebrow">Library</p>
+                <h2 className="page-title">Decks</h2>
               </div>
+              <button className="btn btn--primary">+ New deck</button>
             </div>
+          </div>
 
-            <div className="deck-toolbar">
-              <label className="search">
-                <svg className="search__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-                <input className="input" type="search" placeholder="Search decks and cards…" />
-              </label>
-              <div className="tabs">
-                <button className="tab tab--active">All</button>
-                <button className="tab">Due</button>
-                <button className="tab">In progress</button>
-              </div>
-              <select className="select" style={{ width: 'auto' }}>
-                <option>Recently studied</option>
-                <option>Name A–Z</option>
-                <option>Most cards</option>
-                <option>Lowest accuracy</option>
-              </select>
+          <div className="deck-toolbar">
+            <label className="search">
+              <svg
+                className="search__icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              >
+                <circle cx="11" cy="11" r="7" />
+                <path d="m20 20-3.5-3.5" />
+              </svg>
+              <input
+                className="input"
+                type="search"
+                placeholder="Search decks and cards…"
+              />
+            </label>
+            <div className="tabs">
+              <button className="tab tab--active">All</button>
+              <button className="tab">Due</button>
+              <button className="tab">In progress</button>
             </div>
+            <select className="select" style={{ width: "auto" }}>
+              <option>Recently studied</option>
+              <option>Name A–Z</option>
+              <option>Most cards</option>
+              <option>Lowest accuracy</option>
+            </select>
+          </div>
 
-            <section className="deck-grid">
-              {DECKS.map((deck) => {
-                loopIndex += 1;
+          {search === false ? (
+            <>
+              <DeckView
+                deckMastery={deckMastery}
+                DECKS={DECKS}
+                loopIndex={loopIndex}
+              />
 
-                return (
-                  <article className="deck-card" style={{ '--deck-color': deck.color }} key={deck.id}>
-                    <div className="deck-card__top">
-                      <div className="deck-card__emoji">{deck.emoji}</div>
-                      <div>
-                        <h3 className="deck-card__name">{deck.name}</h3>
-                        <p className="deck-card__meta"><span>25 cards</span> · <span>4 due</span></p>
-                      </div>
-                    </div>
-                    <p className="deck-card__desc">{deck.description}</p>
-                    <div className="deck-card__progress">
-                      <div className="row-between"><span className="faint" style={{ fontSize: 'var(--text-xs)' }}>Mastery</span><span className="mono" style={{ fontSize: 'var(--text-xs)' }}>{`${deckMastery[loopIndex]}`  }</span></div>
-                      <div className="progress"><div className="progress__bar" style={{ width: `${(deckMastery[loopIndex] * 4)}%`}}></div></div>
-                    </div>
-                    <div className="deck-card__actions">
-                      <Link
-                        className="btn btn--primary btn--sm grow"
-                        to={`/study/${encodeURIComponent(deck.id)}?emoji=${encodeURIComponent(deck.emoji)}&name=${encodeURIComponent(deck.name)}`}
-                        onClick={() => {
-                          setActiveLink(`/study/${encodeURIComponent(deck.id)}?emoji=${encodeURIComponent(deck.emoji)}&name=${encodeURIComponent(deck.name)}`);
-                          setDeckId(deck.id);
-                        }}
-                      >
-                        Study
-                      </Link>
-                      <button className="btn btn--secondary btn--sm">Browse</button>
-                    </div>
-                  </article>
-                );
-              })}
-            </section>
-
-            <h3 className="section-title" style={{ marginTop: 'var(--sp-6)' }}>List view (alternative)</h3>
-            <section className="deck-list"> 
-              <div className="deck-row deck-row__head">
-                <span></span><span>Deck</span><span>Cards</span><span>Mastery</span><span>Due</span>
-              </div>
-              {DECKS.map((deck) => {
-                listLoopIndex += 1;
-                let dueItems = 0;
-
-                if (deckMastery[listLoopIndex] > 0) {
-                  dueItems = 25 - (deckMastery[listLoopIndex] / 4);
-                }
-
-                else {
-                  dueItems = 0;
-                }
-
-                return (
-                  <div className="deck-row" key={deck.id}>
-                    <span className="deck-card__emoji" style={{ '--deck-color': deck.color }}>{deck.emoji}</span>
-                    <span><strong>{deck.name}</strong><br /><span className="faint" style={{ fontSize: 'var(--text-xs)' }}>Last studied 2h ago</span></span>
-                    <span className="mono">25</span>
-                    <span className="progress progress--sm"><span className="progress__bar" style={{ width: `${(deckMastery[listLoopIndex] * 4)}%`, display: 'block', height: '100%' }}></span></span>
-                    <span className="badge badge--accent">{dueItems} due</span>
-                  </div>
-                )
-              })}
-            </section>
-
-            <h3 className="section-title" style={{ marginTop: 'var(--sp-6)' }}>Empty state (when a search returns nothing)</h3>
-            <div className="card">
-              <div className="empty-state">
-                <div className="empty-state__icon">🔍</div>
-                <p className="empty-state__title">No decks match “graphql”</p>
-                <p>Try a different search, or create a deck for it.</p>
-                <button className="btn btn--secondary">Clear search</button>
-              </div>
-            </div>
-          </main>
-        </div>
+              <h3
+                className="section-title"
+                style={{ marginTop: "var(--sp-6)" }}
+              >
+                List view
+              </h3>
+              <ListView
+                DECKS={DECKS}
+                deckMastery={deckMastery}
+                listLoopIndex={listLoopIndex}
+              />
+            </>
+          ) : (
+            <>
+              <SearchState />
+            </>
+          )}
+        </main>
       </div>
+    </div>
   );
 }

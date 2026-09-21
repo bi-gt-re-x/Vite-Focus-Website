@@ -6,6 +6,8 @@ import SessionSummary from "../components/study/SessionSummary.jsx";
 import Topbar from "../components/layout/Topbar.jsx";
 import Flashcard from "../components/study/Flashcard.jsx";
 import FLASHCARDS from "../data/flashcards.js";
+import { shuffle } from "../utils/shuffle.js";
+import { studyFlipShortcut } from "../hooks/useKeyboardShortcuts.js";
 
 export default function StudyPage({ activeLink, deckMastery, deckName }) {
   const { deckId } = useParams();
@@ -30,20 +32,7 @@ export default function StudyPage({ activeLink, deckMastery, deckName }) {
   let wrong = 0;
   let percentage = 0;
 
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key === " ") {
-        event.preventDefault();
-        setFlipped((prev) => !prev);
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, []);
+  studyFlipShortcut({setFlipped})
 
   if (deckName === "javascript") {
     index = 0;
@@ -171,7 +160,7 @@ export default function StudyPage({ activeLink, deckMastery, deckName }) {
                   →
                 </button>
 
-                <button className="btn btn--ghost btn--sm">Shuffle</button>
+                <button className="btn btn--ghost btn--sm" onClick={() => {shuffle({subjectCards})}} >Shuffle</button>
               </div>
             </>
           ) : (

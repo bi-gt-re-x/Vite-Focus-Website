@@ -3,9 +3,12 @@ import Topbar from '../components/layout/Topbar.jsx';
 import { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
 import duration from "dayjs/plugin/duration";
+import { useTimer } from '../hooks/useTimer.js';
+import { timerSpaceShortcut, timerResetShortcut } from '../hooks/useKeyboardShortcuts.js';
+import { playChime } from '../utils/sound.js';
 
 export default function TimerPage({ activeLink }) {
-  const [timeLeft, setTimeLeft] = useState(1800);
+  const [timeLeft, setTimeLeft] = useState(2);
   const [paused, setPaused] = useState(true);
   dayjs.extend(duration);
 
@@ -21,6 +24,7 @@ export default function TimerPage({ activeLink }) {
 
     else if (timeLeft === 0) {
       setOffSet(0);
+      playChime();
     } 
 
     else {
@@ -29,45 +33,9 @@ export default function TimerPage({ activeLink }) {
     }
   }, [timeLeft, circumfrence]);
 
-  useEffect(() => {
-    if (paused || timeLeft <= 0) return;
-
-    const timer = setInterval(() => {
-      setTimeLeft(prev => prev - 1);
-    }, 1000);
-
-    return () => clearInterval(timer);  
-  }, [paused, timeLeft]); 
-
-  // Shortcut Section is Down here {6^7} all the useEffects
-
-  useEffect(() => {
-    const handleSpaceDown = (event) => {
-      if (event.key === ' ') {
-        setPaused(!paused);
-      }
-    };
-
-    window.addEventListener('keydown', handleSpaceDown);
-
-    return () => {
-      window.removeEventListener('keydown', handleSpaceDown);
-    };
-  }, [paused]);
-
-  useEffect(() => {
-    const handleResetDown = (event) => {
-      if (event.key === 'r') {
-        setTimeLeft(1800);
-      };
-    };
-
-    window.addEventListener('keydown', handleResetDown);
-
-    return () => {
-      window.removeEventListener('keydown', handleResetDown);
-    };
-  }, [timeLeft]);
+  useTimer({ paused, timeLeft, setTimeLeft });
+  timerSpaceShortcut({ paused, setPaused });
+  timerResetShortcut({ timeLeft, setTimeLeft });
 
   return (
     <div className="app" data-collapsed="false">

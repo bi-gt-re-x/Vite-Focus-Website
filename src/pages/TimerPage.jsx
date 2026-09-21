@@ -6,10 +6,13 @@ import duration from "dayjs/plugin/duration";
 import { useTimer } from '../hooks/useTimer.js';
 import { timerSpaceShortcut, timerResetShortcut } from '../hooks/useKeyboardShortcuts.js';
 import { playChime } from '../utils/sound.js';
+import { formatClock } from '../utils/time.js';
 
 export default function TimerPage({ activeLink }) {
-  const [timeLeft, setTimeLeft] = useState(2);
+  const [timeLeft, setTimeLeft] = useState(1800);
   const [paused, setPaused] = useState(true);
+  const buttons = ["Focus", "Short Break", "Long Break"];
+  const [selectedIndex, setSelectedIndex] = useState(0);
   dayjs.extend(duration);
 
   const radius = 44;
@@ -48,34 +51,18 @@ export default function TimerPage({ activeLink }) {
           className="content content--focus timer-page"
           data-mode="focus"
         >
-          <div
-            className="mode-switch"
-            role="tablist"
-            aria-label="Timer mode"
-          >
-            <button
-              className="mode-switch__btn mode-switch__btn--active"
-              role="tab"
-              aria-selected="true"
-            >
-              Focus
-            </button>
-
-            <button
-              className="mode-switch__btn"
-              role="tab"
-              aria-selected="false"
-            >
-              Short break
-            </button>
-
-            <button
-              className="mode-switch__btn"
-              role="tab"
-              aria-selected="false"
-            >
-              Long break
-            </button>
+          <div className="mode-switch" role="tablist" aria-label="Timer mode">
+            {buttons.map((button, index) => (
+              <button
+                key={index}
+                className={`mode-switch__btn ${selectedIndex === index ? 'mode-switch__btn--active' : ''}`}
+                role="tab"
+                aria-selected={selectedIndex === index}
+                onClick={() => setSelectedIndex(index)}
+              >
+                {button}
+              </button>
+            ))}
           </div>
 
           <div className="timer-task">
@@ -210,7 +197,7 @@ export default function TimerPage({ activeLink }) {
             </div>
 
             <div>
-              <div className="session-strip__value">16:05</div>
+              <div className="session-strip__value">{dayjs().add(30, 'minute').format("HH:mm")}</div>
               <div className="session-strip__label">Finish at</div>
             </div>
           </div>

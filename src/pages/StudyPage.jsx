@@ -160,7 +160,12 @@ export default function StudyPage({ activeLink, deckMastery, deckName }) {
                   →
                 </button>
 
-                <button className="btn btn--ghost btn--sm" onClick={() => {shuffle({subjectCards})}} >Shuffle</button>
+                <button className="btn btn--ghost btn--sm" onClick={() => {
+                    setCards(shuffle(subjectCards));
+                    setCurrentIndex(0);
+                    setFlipped(false);
+                  }}
+                >Shuffle</button>
               </div>
             </>
           ) : (

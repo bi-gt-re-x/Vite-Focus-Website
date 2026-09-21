@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { formatClock } from "../../utils/time";
 
 export default function Topbar({ title }) {
@@ -7,7 +8,7 @@ export default function Topbar({ title }) {
       <div className="topbar__actions">
         <div className="topbar__mini-timer" data-running="true">
           <span className="topbar__mini-dot"></span>
-          <span>{formatClock()}</span>
+          <span>{formatClock(dayjs())}</span>
         </div>
         <button
           className="btn btn--ghost btn--icon tooltip"

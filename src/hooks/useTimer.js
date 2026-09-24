@@ -11,3 +11,28 @@ export function useTimer({ paused, timeLeft, setTimeLeft }) {
         return () => clearInterval(timer);  
     }, [paused, timeLeft, setTimeLeft]);
 }
+
+export function timeHandles({ timeLeft, circumfrence, setOffSet, playChime, setRounds, setTimeLeft }) {
+    useEffect(() => {
+    if (timeLeft === 1500) {
+        setOffSet(circumfrence);
+    } 
+
+    else if (timeLeft === 0) {
+        setOffSet(0);
+        setRounds(rounds + 1);
+        playChime();
+    } 
+
+    else {
+        const percentageLeft = timeLeft / 1500;
+        setOffSet(circumfrence * (1 - percentageLeft));
+    }
+    }, [timeLeft, circumfrence]);
+}
+
+export function handleFocusMinutes() {
+    useEffect(() => {
+
+    });
+}

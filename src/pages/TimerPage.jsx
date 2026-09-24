@@ -1,15 +1,18 @@
-import SideBar from '../components/layout/SideBar.jsx';
-import Topbar from '../components/layout/Topbar.jsx';
-import { useState, useEffect } from 'react';
-import dayjs from 'dayjs';
+import SideBar from "../components/layout/SideBar.jsx";
+import Topbar from "../components/layout/Topbar.jsx";
+import { useState, useEffect } from "react";
+import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
-import { useTimer } from '../hooks/useTimer.js';
-import { timerSpaceShortcut, timerResetShortcut } from '../hooks/useKeyboardShortcuts.js';
-import { playChime } from '../utils/sound.js';
-import { formatClock } from '../utils/time.js';
+import { useTimer, timeHandles } from "../hooks/useTimer.js";
+import {
+  timerSpaceShortcut,
+  timerResetShortcut,
+} from "../hooks/useKeyboardShortcuts.js";
+import { playChime } from "../utils/sound.js";
+import { formatClock } from "../utils/time.js";
 
 export default function TimerPage({ activeLink }) {
-  const [timeLeft, setTimeLeft] = useState(1800);
+  const [timeLeft, setTimeLeft] = useState(1500);
   const [paused, setPaused] = useState(true);
   const buttons = ["Focus", "Short Break", "Long Break"];
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -18,44 +21,37 @@ export default function TimerPage({ activeLink }) {
   const radius = 44;
   const circumfrence = 2 * Math.PI * radius;
   const [strokeDashoffset, setOffSet] = useState(0);
+  const [rounds, setRounds] = useState(0);
+  const [cumuFocus, setCumuFocus] = useState(0);
 
-  useEffect(() => {
-
-    if (timeLeft === 1800) {
-      setOffSet(circumfrence);
-    } 
-
-    else if (timeLeft === 0) {
-      setOffSet(0);
-      playChime();
-    } 
-
-    else {
-      const percentageLeft = timeLeft / 1800;
-      setOffSet(circumfrence * (1 - percentageLeft));
-    }
-  }, [timeLeft, circumfrence]);
-
+  timeHandles({ timeLeft, circumfrence, setOffSet, playChime, setRounds, setTimeLeft });
   useTimer({ paused, timeLeft, setTimeLeft });
   timerSpaceShortcut({ paused, setPaused });
   timerResetShortcut({ timeLeft, setTimeLeft });
 
+  const [workOn, setWorkOn] = useState(() => {
+    const savedMastery = localStorage.getItem('workon');
+    return savedMastery ? JSON.parse(savedMastery) 
+    : ''
+  });
+
+  useEffect(() => {
+    localStorage.setItem('workon', JSON.stringify(workOn));
+  }, [workOn])
+
   return (
     <div className="app" data-collapsed="false">
-      {<SideBar activeStudyLink={activeLink}/>}
+      {<SideBar activeStudyLink={activeLink} />}
 
       <div className="app__main">
         {<Topbar title="Timer" />}
 
-        <main
-          className="content content--focus timer-page"
-          data-mode="focus"
-        >
+        <main className="content content--focus timer-page" data-mode="focus">
           <div className="mode-switch" role="tablist" aria-label="Timer mode">
             {buttons.map((button, index) => (
               <button
                 key={index}
-                className={`mode-switch__btn ${selectedIndex === index ? 'mode-switch__btn--active' : ''}`}
+                className={`mode-switch__btn ${selectedIndex === index ? "mode-switch__btn--active" : ""}`}
                 role="tab"
                 aria-selected={selectedIndex === index}
                 onClick={() => setSelectedIndex(index)}
@@ -71,21 +67,13 @@ export default function TimerPage({ activeLink }) {
             <input
               className="timer-task__input"
               placeholder="What are you working on?"
+              defaultValue={workOn}
             />
           </div>
 
           <div className="dial" data-running="true">
-            <svg
-              className="dial__svg"
-              viewBox="0 0 100 100"
-              aria-hidden="true"
-            >
-              <circle
-                className="dial__track"
-                cx="50"
-                cy="50"
-                r={radius}
-              />
+            <svg className="dial__svg" viewBox="0 0 100 100" aria-hidden="true">
+              <circle className="dial__track" cx="50" cy="50" r={radius} />
 
               <circle
                 className="dial__progress"
@@ -94,37 +82,39 @@ export default function TimerPage({ activeLink }) {
                 r={radius}
                 strokeDasharray={circumfrence}
                 strokeDashoffset={strokeDashoffset}
-                style={{ transition: 'stroke-dashoffset 1s linear' }}
+                style={{ transition: "stroke-dashoffset 1s linear" }}
               />
             </svg>
 
             <div className="dial__glow"></div>
 
             <div className="dial__inner">
-              <span
-                className="dial__time"
-                role="timer"
-                aria-live="off"
-              >
+              <span className="dial__time" role="timer" aria-live="off">
                 {dayjs.duration(timeLeft, "seconds").format("mm:ss")}
               </span>
 
               <span className="dial__label">Focus</span>
 
-              <span className="dial__round">
-                Round 2 of 4
-              </span>
+              <span className="dial__round">Round {rounds} of 4</span>
             </div>
           </div>
 
-          <div
-            className="round-track"
-            aria-label="Rounds completed"
-          >
-            <span className="round-dot round-dot--done"></span>
-            <span className="round-dot round-dot--current"></span>
-            <span className="round-dot"></span>
-            <span className="round-dot"></span>
+          <div className="round-track" aria-label="Rounds completed">
+            {(() => {
+              const dots = [];
+              for (let i = 0; i <= 4; i++) {
+                if (i < rounds) {
+                  dots.push(<span key={i} className="round-dot--done"></span>);
+                } else if (i === rounds) {
+                  dots.push(
+                    <span key={i} className="round-dot--current"></span>,
+                  );
+                } else {
+                  dots.push(<span key={i} className="round-dot"></span>);
+                }
+              }
+              return dots;
+            })()}
           </div>
 
           <div className="timer-controls">
@@ -133,7 +123,7 @@ export default function TimerPage({ activeLink }) {
               data-tip="Reset"
               aria-label="Reset timer"
               onClick={() => {
-                setTimeLeft(1800);
+                setTimeLeft(1500);
               }}
             >
               <svg
@@ -187,7 +177,7 @@ export default function TimerPage({ activeLink }) {
 
           <div className="session-strip">
             <div>
-              <div className="session-strip__value">2</div>
+              <div className="session-strip__value">{rounds}</div>
               <div className="session-strip__label">Rounds done</div>
             </div>
 
@@ -197,7 +187,9 @@ export default function TimerPage({ activeLink }) {
             </div>
 
             <div>
-              <div className="session-strip__value">{dayjs().add(30, 'minute').format("HH:mm")}</div>
+              <div className="session-strip__value">
+                {dayjs().add(30, "minute").format("HH:mm")}
+              </div>
               <div className="session-strip__label">Finish at</div>
             </div>
           </div>

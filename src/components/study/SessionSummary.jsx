@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react"
 
 export default function SessionSummary({ goodEasy, hard, wrong, percentage }) {
@@ -64,9 +65,9 @@ export default function SessionSummary({ goodEasy, hard, wrong, percentage }) {
           Review the {wrong} you missed
         </button>
 
-        <a className="btn btn--secondary" href="/timer">
+        <Link className="btn btn--secondary" to="/timer">
           Start a break
-        </a>
+        </Link>
       </div>
     </section>
   )

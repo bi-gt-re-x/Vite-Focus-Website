@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import SideBar from "../components/layout/SideBar.jsx";
 import GradeButtons from "../components/study/GradeButtons.jsx";
 import SessionSummary from "../components/study/SessionSummary.jsx";
@@ -82,9 +82,9 @@ export default function StudyPage({ activeLink, deckMastery, deckName }) {
           <div className="study-header">
             <div className="study-header__row">
               <div className="row">
-                <a className="btn btn--ghost btn--sm" href="/decks">
+                <Link className="btn btn--ghost btn--sm" to="/decks">
                   ← Decks
-                </a>
+                </Link>
 
                 <span className="badge badge--accent">
                   {emoji} {name}

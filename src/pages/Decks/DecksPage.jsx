@@ -1,10 +1,10 @@
-import { DECKS } from "../data/decks.js";
+import { DECKS } from "../../data/decks.js";
 import { Link } from "react-router-dom";
-import SideBar from "../components/layout/SideBar.jsx";
-import Topbar from "../components/layout/Topbar.jsx";
-import { DeckView } from "../components/decks/DeckView.jsx";
-import { ListView } from "../components/decks/ListView.jsx";
-import { SearchState } from "../components/decks/SearchState.jsx";
+import SideBar from "../../components/layout/SideBar.jsx";
+import Topbar from "../../components/layout/Topbar.jsx";
+import { DeckView } from "./DeckView.jsx";
+import { ListView } from "./ListView.jsx";
+import { SearchState } from "./SearchState.jsx";
 
 export default function DecksPage({
   setActiveLink,

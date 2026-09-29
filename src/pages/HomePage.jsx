@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import SideBar from '../components/layout/SideBar.jsx';
 import Topbar from '../components/layout/Topbar.jsx';
 
@@ -22,16 +23,16 @@ export default function HomePage({ activeLink }) {
               </p>
 
               <div className="hero__actions">
-                <a className="btn btn--primary btn--lg" href="/timer">
+                <Link className="btn btn--primary btn--lg" to="/timer">
                   <svg viewBox="0 0 24 24" fill="currentColor">
                     <path d="M8 5v14l11-7z" />
                   </svg>
                   Start focus session
-                </a>
+                </Link>
 
-                <a className="btn btn--secondary btn--lg" href="/study">
+                <Link className="btn btn--secondary btn--lg" to="/study">
                   Review 12 due cards
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -78,13 +79,13 @@ export default function HomePage({ activeLink }) {
             <article className="card">
               <div className="card__header">
                 <h3 className="card__title">Jump back in</h3>
-                <a className="btn btn--ghost btn--sm" href="/decks">
+                <Link className="btn btn--ghost btn--sm" to="/decks">
                   All decks
-                </a>
+                </Link>
               </div>
 
               <div className="deck-shortcut-list">
-                <a className="deck-shortcut" href="/study">
+                <Link className="deck-shortcut" to="/study">
                   <span className="deck-shortcut__swatch">⚛️</span>
                   <span className="deck-shortcut__meta">
                     <span className="deck-shortcut__name">
@@ -95,9 +96,9 @@ export default function HomePage({ activeLink }) {
                     </span>
                   </span>
                   <span className="badge badge--accent">Due</span>
-                </a>
+                </Link>
 
-                <a className="deck-shortcut" href="/study">
+                <Link className="deck-shortcut" to="/study">
                   <span className="deck-shortcut__swatch">🟨</span>
                   <span className="deck-shortcut__meta">
                     <span className="deck-shortcut__name">
@@ -108,9 +109,9 @@ export default function HomePage({ activeLink }) {
                     </span>
                   </span>
                   <span className="badge badge--accent">Due</span>
-                </a>
+                </Link>
 
-                <a className="deck-shortcut" href="/study">
+                <Link className="deck-shortcut" to="/study">
                   <span className="deck-shortcut__swatch">🎨</span>
                   <span className="deck-shortcut__meta">
                     <span className="deck-shortcut__name">CSS & Layout</span>
@@ -119,9 +120,9 @@ export default function HomePage({ activeLink }) {
                     </span>
                   </span>
                   <span className="badge">Rested</span>
-                </a>
+                </Link>
 
-                <a className="deck-shortcut" href="/study">
+                <Link className="deck-shortcut" to="/study">
                   <span className="deck-shortcut__swatch">🧠</span>
                   <span className="deck-shortcut__meta">
                     <span className="deck-shortcut__name">CS Foundations</span>
@@ -130,7 +131,7 @@ export default function HomePage({ activeLink }) {
                     </span>
                   </span>
                   <span className="badge">New</span>
-                </a>
+                </Link>
               </div>
             </article>
 

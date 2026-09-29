@@ -1,10 +1,10 @@
-import DecksPage from './pages/DecksPage.jsx'
+import DecksPage from './pages/Decks/DecksPage.jsx'
 import HomePage from './pages/HomePage.jsx';
-import TimerPage from './pages/TimerPage.jsx';
+import TimerPage from './pages/Timer/TimerPage.jsx';
 import StudyPage from './pages/StudyPage.jsx';
 import StatsPage from './pages/StatsPage.jsx';
 import SettingsPage from './pages/SettingsPage.jsx';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 export default function App() {
@@ -40,6 +40,7 @@ export default function App() {
     <Routes>
       <Route path="/decks" element={<DecksPage setActiveLink={setActiveLink} activeLink={activeLink} deckMastery={deckMastery} setDeckId={setDeckId} />} />
       <Route path="/timer" element={<TimerPage  activeLink={activeLink} />}/>
+      <Route path="/study" element={<Navigate to={activeLink} replace />} />
       <Route path="/study/:deckId" element={<StudyPage activeLink={activeLink} deckMastery={deckMastery} deckName={deckId} />} />
       <Route path="/stats" element={<StatsPage activeLink={activeLink}  />} />
       <Route path="/settings" element={<SettingsPage activeLink={activeLink}  />} />

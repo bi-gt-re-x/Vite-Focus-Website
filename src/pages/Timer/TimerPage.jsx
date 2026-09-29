@@ -1,15 +1,16 @@
-import SideBar from "../components/layout/SideBar.jsx";
-import Topbar from "../components/layout/Topbar.jsx";
+import SideBar from "../../components/layout/SideBar.jsx";
+import Topbar from "../../components/layout/Topbar.jsx";
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
-import { useTimer, timeHandles } from "../hooks/useTimer.js";
+import { useTimer, timeHandles } from "../../hooks/useTimer.js";
 import {
   timerSpaceShortcut,
   timerResetShortcut,
-} from "../hooks/useKeyboardShortcuts.js";
-import { playChime } from "../utils/sound.js";
-import { formatClock } from "../utils/time.js";
+} from "../../hooks/useKeyboardShortcuts.js";
+import { playChime } from "../../utils/sound.js";
+import { formatClock } from "../../utils/time.js";
+import ModeSwitch from "./ModeSwitch.jsx";
 
 export default function TimerPage({ activeLink }) {
   const [timeLeft, setTimeLeft] = useState(1500);
@@ -47,29 +48,7 @@ export default function TimerPage({ activeLink }) {
         {<Topbar title="Timer" />}
 
         <main className="content content--focus timer-page" data-mode="focus">
-          <div className="mode-switch" role="tablist" aria-label="Timer mode">
-            {buttons.map((button, index) => (
-              <button
-                key={index}
-                className={`mode-switch__btn ${selectedIndex === index ? "mode-switch__btn--active" : ""}`}
-                role="tab"
-                aria-selected={selectedIndex === index}
-                onClick={() => setSelectedIndex(index)}
-              >
-                {button}
-              </button>
-            ))}
-          </div>
-
-          <div className="timer-task">
-            <span>📌</span>
-
-            <input
-              className="timer-task__input"
-              placeholder="What are you working on?"
-              defaultValue={workOn}
-            />
-          </div>
+          <ModeSwitch buttons={buttons} selectedIndex={selectedIndex} workOn={workOn} setSelectedIndex={setSelectedIndex} />
 
           <div className="dial" data-running="true">
             <svg className="dial__svg" viewBox="0 0 100 100" aria-hidden="true">

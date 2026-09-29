@@ -8,7 +8,6 @@ export default function ModeSwitch({buttons, selectedIndex, workOn, setSelectedI
             className={`mode-switch__btn ${selectedIndex === index ? "mode-switch__btn--active" : ""}`}
             role="tab"
             aria-selected={selectedIndex === index}
-            onClick={() => setSelectedIndex(index)}
           >
             {button}
           </button>

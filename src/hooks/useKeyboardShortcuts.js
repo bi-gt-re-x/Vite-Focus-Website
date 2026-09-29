@@ -32,6 +32,22 @@ export function timerResetShortcut({ timeLeft, setTimeLeft }) {
   }, [timeLeft]);
 }
 
+export function timerSkipShortcut({ setTimeLeft, timeLeft }) {
+  useEffect(() => {
+    const handleSkipShortcut = (event) => {
+      if (event.key === "s") {
+          setTimeLeft(0);
+      };
+    };
+
+      window.addEventListener("keydown", handleSkipShortcut);
+
+      return () => {
+        window.removeEventListener("keydown", handleSkipShortcut);
+      };
+  }, [timeLeft])
+}
+
 export function studyFlipShortcut({ setFlipped }) {
   useEffect(() => {
     const handleKeyDown = (event) => {

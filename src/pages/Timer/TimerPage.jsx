@@ -7,13 +7,18 @@ import { useTimer, timeHandles } from "../../hooks/useTimer.js";
 import {
   timerSpaceShortcut,
   timerResetShortcut,
+  timerSkipShortcut
 } from "../../hooks/useKeyboardShortcuts.js";
 import { playChime } from "../../utils/sound.js";
 import { formatClock } from "../../utils/time.js";
 import ModeSwitch from "./ModeSwitch.jsx";
+import RoundTrack from "./RoundTrack.jsx";
+import TimerDial from "./TimerDial.jsx";
 
 export default function TimerPage({ activeLink }) {
-  const [timeLeft, setTimeLeft] = useState(1500);
+  const timeArray = [1500, 300, 900];
+  const [currentTimeIndex, setCurrentTimeIndex] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(timeArray[currentTimeIndex]);
   const [paused, setPaused] = useState(true);
   const buttons = ["Focus", "Short Break", "Long Break"];
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -25,10 +30,11 @@ export default function TimerPage({ activeLink }) {
   const [rounds, setRounds] = useState(0);
   const [cumuFocus, setCumuFocus] = useState(0);
 
-  timeHandles({ timeLeft, circumfrence, setOffSet, playChime, setRounds, setTimeLeft });
+  timeHandles({ timeLeft, circumfrence, setOffSet, playChime, setRounds, setTimeLeft, currentTimeIndex, rounds, timeArray, setSelectedIndex, setCurrentTimeIndex });
   useTimer({ paused, timeLeft, setTimeLeft });
   timerSpaceShortcut({ paused, setPaused });
   timerResetShortcut({ timeLeft, setTimeLeft });
+  timerSkipShortcut({ timeLeft, setTimeLeft });
 
   const [workOn, setWorkOn] = useState(() => {
     const savedMastery = localStorage.getItem('workon');
@@ -49,52 +55,8 @@ export default function TimerPage({ activeLink }) {
 
         <main className="content content--focus timer-page" data-mode="focus">
           <ModeSwitch buttons={buttons} selectedIndex={selectedIndex} workOn={workOn} setSelectedIndex={setSelectedIndex} />
-
-          <div className="dial" data-running="true">
-            <svg className="dial__svg" viewBox="0 0 100 100" aria-hidden="true">
-              <circle className="dial__track" cx="50" cy="50" r={radius} />
-
-              <circle
-                className="dial__progress"
-                cx="50"
-                cy="50"
-                r={radius}
-                strokeDasharray={circumfrence}
-                strokeDashoffset={strokeDashoffset}
-                style={{ transition: "stroke-dashoffset 1s linear" }}
-              />
-            </svg>
-
-            <div className="dial__glow"></div>
-
-            <div className="dial__inner">
-              <span className="dial__time" role="timer" aria-live="off">
-                {dayjs.duration(timeLeft, "seconds").format("mm:ss")}
-              </span>
-
-              <span className="dial__label">Focus</span>
-
-              <span className="dial__round">Round {rounds} of 4</span>
-            </div>
-          </div>
-
-          <div className="round-track" aria-label="Rounds completed">
-            {(() => {
-              const dots = [];
-              for (let i = 0; i <= 4; i++) {
-                if (i < rounds) {
-                  dots.push(<span key={i} className="round-dot--done"></span>);
-                } else if (i === rounds) {
-                  dots.push(
-                    <span key={i} className="round-dot--current"></span>,
-                  );
-                } else {
-                  dots.push(<span key={i} className="round-dot"></span>);
-                }
-              }
-              return dots;
-            })()}
-          </div>
+          <TimerDial rounds={rounds} radius={radius} circumfrence={circumfrence} strokeDashoffset={strokeDashoffset} timeLeft={timeLeft} />
+          <RoundTrack rounds={rounds} />
 
           <div className="timer-controls">
             <button
@@ -102,7 +64,7 @@ export default function TimerPage({ activeLink }) {
               data-tip="Reset"
               aria-label="Reset timer"
               onClick={() => {
-                setTimeLeft(1500);
+                setTimeLeft(timeArray[currentTimeIndex]);
               }}
             >
               <svg
@@ -140,6 +102,7 @@ export default function TimerPage({ activeLink }) {
               className="timer-controls__side tooltip"
               data-tip="Skip"
               aria-label="Skip to next phase"
+              onClick={() => {setTimeLeft(0);}}
             >
               <svg
                 viewBox="0 0 24 24"

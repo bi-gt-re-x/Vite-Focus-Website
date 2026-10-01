@@ -14,6 +14,7 @@ import { formatClock } from "../../utils/time.js";
 import ModeSwitch from "./ModeSwitch.jsx";
 import RoundTrack from "./RoundTrack.jsx";
 import TimerDial from "./TimerDial.jsx";
+import { TimerSummary } from "./TimerSummary.jsx";
 
 export default function TimerPage({ activeLink }) {
   const timeArray = [1500, 300, 900];
@@ -29,9 +30,10 @@ export default function TimerPage({ activeLink }) {
   const [strokeDashoffset, setOffSet] = useState(0);
   const [rounds, setRounds] = useState(0);
   const [cumuFocus, setCumuFocus] = useState(0);
+  const [time, setTime] = useState(0);
 
   timeHandles({ timeLeft, circumfrence, setOffSet, playChime, setRounds, setTimeLeft, currentTimeIndex, rounds, timeArray, setSelectedIndex, setCurrentTimeIndex });
-  useTimer({ paused, timeLeft, setTimeLeft });
+  useTimer({ paused, timeLeft, time, setTimeLeft });
   timerSpaceShortcut({ paused, setPaused });
   timerResetShortcut({ timeLeft, setTimeLeft });
   timerSkipShortcut({ timeLeft, setTimeLeft });
@@ -117,42 +119,7 @@ export default function TimerPage({ activeLink }) {
             </button>
           </div>
 
-          <div className="session-strip">
-            <div>
-              <div className="session-strip__value">{rounds}</div>
-              <div className="session-strip__label">Rounds done</div>
-            </div>
-
-            <div>
-              <div className="session-strip__value">50m</div>
-              <div className="session-strip__label">Focused today</div>
-            </div>
-
-            <div>
-              <div className="session-strip__value">
-                {dayjs().add(30, "minute").format("HH:mm")}
-              </div>
-              <div className="session-strip__label">Finish at</div>
-            </div>
-          </div>
-
-          <p className="keyboard-hints">
-            <span>
-              <span className="kbd">Space</span> start / pause
-            </span>
-
-            <span>
-              <span className="kbd">R</span> reset
-            </span>
-
-            <span>
-              <span className="kbd">S</span> skip
-            </span>
-
-            <span>
-              <span className="kbd">F</span> zen mode
-            </span>
-          </p>
+          <TimerSummary rounds={rounds} time={Math.floor(time / 60)} sessionLength={timeArray[currentTimeIndex]} />
         </main>
       </div>
     </div>

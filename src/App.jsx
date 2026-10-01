@@ -1,7 +1,7 @@
 import DecksPage from './pages/Decks/DecksPage.jsx'
 import HomePage from './pages/HomePage.jsx';
 import TimerPage from './pages/Timer/TimerPage.jsx';
-import StudyPage from './pages/StudyPage.jsx';
+import StudyPage from './pages/Study/StudyPage.jsx';
 import StatsPage from './pages/StatsPage.jsx';
 import SettingsPage from './pages/SettingsPage.jsx';
 import { Routes, Route, Navigate } from 'react-router-dom';
@@ -10,17 +10,17 @@ import { useState, useEffect } from 'react';
 export default function App() {
   const [activeLink, setActiveLink] = useState(() => {
     const savedLink = localStorage.getItem('studyLink');
-    return savedLink ? JSON.parse(savedLink) : '/study/javascript?emoji=🟨&name=JavaScript%20Fundamentals';
+    return savedLink || '/study/javascript?emoji=🟨&name=JavaScript%20Fundamentals';
   });
 
   const [deckId, setDeckId] = useState(() => {
     const deckId = localStorage.getItem('deckId');
-    return deckId ? JSON.parse(deckId) : 'javascript';
+    return deckId || 'javascript';
   });
 
   const [deckMastery, setDeckMastery] = useState(() => {
     const savedMastery = localStorage.getItem('deckMastery');
-    return savedMastery ? JSON.parse(savedMastery) 
+    return savedMastery ? JSON.parse(savedMastery)
     : [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   });
 
@@ -29,11 +29,11 @@ export default function App() {
   }, [deckMastery])
 
   useEffect(() => {
-    localStorage.setItem('studyLink', JSON.stringify(activeLink));
+    localStorage.setItem('studyLink', activeLink);
   }, [activeLink]);
 
   useEffect(() => {
-    localStorage.setItem('deckId', JSON.stringify(deckId));
+    localStorage.setItem('deckId', deckId);
   }, [deckId]);
 
   return (

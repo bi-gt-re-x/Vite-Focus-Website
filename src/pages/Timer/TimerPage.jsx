@@ -40,8 +40,7 @@ export default function TimerPage({ activeLink }) {
 
   const [workOn, setWorkOn] = useState(() => {
     const savedMastery = localStorage.getItem('workon');
-    return savedMastery ? JSON.parse(savedMastery) 
-    : ''
+    return savedMastery || ''
   });
 
   useEffect(() => {

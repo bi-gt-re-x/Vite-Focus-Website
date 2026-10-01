@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
-import SideBar from "../components/layout/SideBar.jsx";
-import GradeButtons from "../components/study/GradeButtons.jsx";
-import SessionSummary from "../components/study/SessionSummary.jsx";
-import Topbar from "../components/layout/Topbar.jsx";
-import Flashcard from "../components/study/Flashcard.jsx";
-import FLASHCARDS from "../data/flashcards.js";
-import { shuffle } from "../utils/shuffle.js";
-import { studyFlipShortcut } from "../hooks/useKeyboardShortcuts.js";
+import SideBar from "../../components/layout/SideBar.jsx";
+import GradeButtons from "./GradeButtons.jsx";
+import SessionSummary from "./SessionSummary.jsx";
+import Topbar from "../../components/layout/Topbar.jsx";
+import Flashcard from "./Flashcard.jsx";
+import FLASHCARDS from "../../data/flashcards.js";
+import { shuffle } from "../../utils/shuffle.js";
+import { studyFlipShortcut } from "../../hooks/useKeyboardShortcuts.js";
 
 export default function StudyPage({ activeLink, deckMastery, deckName }) {
   const { deckId } = useParams();

@@ -40,7 +40,7 @@ export default function App() {
       <Route path="/study" element={<Navigate to={activeLink} replace />} />
       <Route path="/study/:deckId" element={<StudyPage activeLink={activeLink} deckMastery={deckMastery} deckName={deckId} />} />
       <Route path="/stats" element={<StatsPage activeLink={activeLink}  />} />
-      <Route path="/settings" element={<SettingsPage activeLink={activeLink}  />} />
+      <Route path="/settings" element={<SettingsPage activeLink={activeLink} setTimeArray={setTimeArray} />} />
       <Route index element={<HomePage activeLink={activeLink}  />}/>
     </Routes>
   )

@@ -5,7 +5,7 @@ import Topbar from "../../components/layout/Topbar.jsx";
 import { TimerSwitch } from "./TimerSwitch.jsx";
 import { THEMES } from "../../data/themes.js";
 
-export default function SettingsPage({ activeLink }) {
+export default function SettingsPage({ activeLink, setTimeArray }) {
   const buttons = ["Classic · 25/5/15", "Deep work · 50/10/30", "Sprint · 15/3/10"];
   const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -54,7 +54,7 @@ export default function SettingsPage({ activeLink }) {
                     className="preset-row"
                     style={{ marginBottom: "var(--sp-4)" }}
                   >
-                    <TimerSwitch buttons={buttons} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} />
+                    <TimerSwitch buttons={buttons} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} setTimeArray={setTimeArray} />
                   </div>
 
                   <div className="setting-row">

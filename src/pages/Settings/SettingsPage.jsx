@@ -1,33 +1,20 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import SideBar from '../components/layout/SideBar.jsx';
-import Topbar from "../components/layout/Topbar.jsx";
-import { THEMES } from "../data/themes";
+import SideBar from '../../components/layout/SideBar.jsx';
+import Topbar from "../../components/layout/Topbar.jsx";
+import { TimerSwitch } from "./TimerSwitch.jsx";
+import { THEMES } from "../../data/themes.js";
 
 export default function SettingsPage({ activeLink }) {
+  const buttons = ["Classic · 25/5/15", "Deep work · 50/10/30", "Sprint · 15/3/10"];
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
   return (
     <div className="app" data-collapsed="false">
       <SideBar activeStudyLink={activeLink} />
 
       <div className="app__main">
         {<Topbar title="Settings" />}
-        <header className="topbar">
-          <h1 className="topbar__title">Settings</h1>
-
-          <div className="topbar__actions">
-            <div className="topbar__mini-timer" data-running="true">
-              <span className="topbar__mini-dot"></span>
-              <span>18:42</span>
-            </div>
-
-            <button
-              className="btn btn--ghost btn--icon tooltip"
-              data-tip="Toggle theme"
-              aria-label="Toggle theme"
-            >
-              🌙
-            </button>
-          </div>
-        </header>
 
         <main className="content">
           <div className="page-header">
@@ -67,17 +54,7 @@ export default function SettingsPage({ activeLink }) {
                     className="preset-row"
                     style={{ marginBottom: "var(--sp-4)" }}
                   >
-                    <button className="chip chip--active">
-                      Classic · 25/5/15
-                    </button>
-
-                    <button className="chip">
-                      Deep work · 50/10/30
-                    </button>
-
-                    <button className="chip">
-                      Sprint · 15/3/10
-                    </button>
+                    <TimerSwitch buttons={buttons} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} />
                   </div>
 
                   <div className="setting-row">
@@ -448,7 +425,6 @@ export default function SettingsPage({ activeLink }) {
             </div>
           </div>
 
-          {/* MODAL + TOAST REFERENCE */}
           <h3
             className="section-title"
             style={{ marginTop: "var(--sp-7)" }}

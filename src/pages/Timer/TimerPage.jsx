@@ -16,8 +16,7 @@ import RoundTrack from "./RoundTrack.jsx";
 import TimerDial from "./TimerDial.jsx";
 import { TimerSummary } from "./TimerSummary.jsx";
 
-export default function TimerPage({ activeLink }) {
-  const timeArray = [1500, 300, 900];
+export default function TimerPage({ activeLink, timeArray }) {
   const [currentTimeIndex, setCurrentTimeIndex] = useState(0);
   const [timeLeft, setTimeLeft] = useState(timeArray[currentTimeIndex]);
   const [paused, setPaused] = useState(true);

@@ -68,6 +68,8 @@ export default function DecksPage({
           {search === false ? (
             <>
               <DeckView
+                setActiveLink={setActiveLink}
+                setDeckId={setDeckId}
                 deckMastery={deckMastery}
                 DECKS={DECKS}
                 loopIndex={loopIndex}

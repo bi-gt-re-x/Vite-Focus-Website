@@ -27,10 +27,9 @@ export default function StudyPage({ activeLink, deckMastery, deckName }) {
 
   let index = 0;
 
-  let goodEasy = 0;
-  let hard = 0;
-  let wrong = 0;
-  let percentage = 0;
+  const [goodEasy, setGoodEasy] = useState(0);
+  const [hard, setHard] = useState(0);
+  const [wrong, setWrong] = useState(0);
 
   studyFlipShortcut({setFlipped})
 
@@ -112,10 +111,9 @@ export default function StudyPage({ activeLink, deckMastery, deckName }) {
               <GradeButtons
                 isRated={isRated}
                 setisRated={setisRated}
-                percentage={percentage}
-                goodEasy={goodEasy}
-                wrong={wrong}
-                hard={hard}
+                setGoodEasy={setGoodEasy}
+                setWrong={setWrong}
+                setHard={setHard}
                 deckMastery={deckMastery}
                 index={index}
               />
@@ -173,7 +171,7 @@ export default function StudyPage({ activeLink, deckMastery, deckName }) {
               goodEasy={goodEasy}
               hard={hard}
               wrong={wrong}
-              percentage={percentage}
+              percentage={goodEasy}
             />
           )}
         </main>

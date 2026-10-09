@@ -1,4 +1,4 @@
-export default function GradeButtons({ isRated, setisRated, percentage, hard, deckMastery, index, goodEasy, wrong}) {
+export default function GradeButtons({ isRated, setisRated, setHard, setWrong, setGoodEasy, deckMastery, index }) {
   return (
     <div className="grade-row">
       <button
@@ -6,7 +6,7 @@ export default function GradeButtons({ isRated, setisRated, percentage, hard, de
         style={{ opacity: isRated ? 0.6 : 1 }}
         onClick={() => {
           if (isRated === false) {
-            wrong += 1;
+            setWrong((prev) => prev + 1);
             setisRated(true);
           }
         }}
@@ -19,8 +19,7 @@ export default function GradeButtons({ isRated, setisRated, percentage, hard, de
         style={{ opacity: isRated ? 0.6 : 1 }}
         onClick={() => {
           if (isRated === false) {
-            ((percentage += 0), 5);
-            hard += 1;
+            setHard((prev) => prev + 1);
             deckMastery[index] += 1;
             setisRated(true);
           }
@@ -34,8 +33,7 @@ export default function GradeButtons({ isRated, setisRated, percentage, hard, de
         style={{ opacity: isRated ? 0.6 : 1 }}
         onClick={() => {
           if (isRated === false) {
-            percentage += 1;
-            goodEasy += 1;
+            setGoodEasy((prev) => prev + 1);
             deckMastery[index] += 1;
             setisRated(true);
           }
@@ -49,8 +47,7 @@ export default function GradeButtons({ isRated, setisRated, percentage, hard, de
         style={{ opacity: isRated ? 0.6 : 1 }}
         onClick={() => {
           if (isRated === false) {
-            percentage += 1;
-            goodEasy += 1;
+            setGoodEasy((prev) => prev + 1);
             deckMastery[index] += 1;
             setisRated(true);
           }

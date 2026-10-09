@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export function DeckView({ deckMastery, loopIndex, DECKS }) {
+export function DeckView({ deckMastery, loopIndex, DECKS, setActiveLink, setDeckId }) {
   return (
     <section className="deck-grid">
       {DECKS.map((deck) => {

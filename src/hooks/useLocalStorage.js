@@ -4,7 +4,9 @@ export function useLocalStorage({
     deckMastery,
     activeLink,
     deckId,
-    timeArray
+    timeArray,
+    pomodoro,
+    cardsReviewed
 }) {
     useEffect(() => {
         localStorage.setItem('deckMastery', JSON.stringify(deckMastery));
@@ -21,4 +23,12 @@ export function useLocalStorage({
     useEffect(() => {
         localStorage.setItem('timeArray', JSON.stringify(timeArray));
     }, [timeArray]);
+
+    useEffect(() => {
+        localStorage.setItem('pomodoro', pomodoro)
+    }, [pomodoro])
+
+    useEffect(() => {
+        localStorage.setItem('cardsReviewed', cardsReviewed);
+    }, [cardsReviewed])
 }

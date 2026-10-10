@@ -9,7 +9,7 @@ import FLASHCARDS from "../../data/flashcards.js";
 import { shuffle } from "../../utils/shuffle.js";
 import { studyFlipShortcut } from "../../hooks/useKeyboardShortcuts.js";
 
-export default function StudyPage({ activeLink, deckMastery, deckName }) {
+export default function StudyPage({ activeLink, deckMastery, deckName, cardsReviewed, setCardsReviewed }) {
   const { deckId } = useParams();
   const [searchParams] = useSearchParams();
 
@@ -116,6 +116,8 @@ export default function StudyPage({ activeLink, deckMastery, deckName }) {
                 setHard={setHard}
                 deckMastery={deckMastery}
                 index={index}
+                cardsReviewed={cardsReviewed}
+                setCardsReviewed={setCardsReviewed}
               />
               <div className="study-nav">
                 <button

@@ -1,8 +1,8 @@
 import DecksPage from './pages/Decks/DecksPage.jsx'
-import HomePage from './pages/HomePage.jsx';
+import HomePage from './pages/HomePage/HomePage.jsx';
 import TimerPage from './pages/Timer/TimerPage.jsx';
 import StudyPage from './pages/Study/StudyPage.jsx';
-import StatsPage from './pages/StatsPage.jsx';
+import StatsPage from './pages/Stats/StatsPage.jsx';
 import SettingsPage from './pages/Settings/SettingsPage.jsx';
 import { useLocalStorage } from './hooks/useLocalStorage.js';
 import { Routes, Route, Navigate } from 'react-router-dom';
@@ -25,23 +25,33 @@ export default function App() {
     : [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   });
 
-  const [timeArray, setTimeArray] = useState(() => {
+  const [timeArray, setTimeArray] = useState(() => {  
     const savedArray = localStorage.getItem('timeArray');
     return savedArray ? JSON.parse(savedArray)
     : [1500, 300, 900]
   });
 
-  useLocalStorage({activeLink, deckId, deckMastery, timeArray});
+  const [pomodoros, setPomodoros] = useState(() => {
+    const savedPomo = localStorage.getItem('pomodoros');
+    return savedPomo ? savedPomo : 0;
+  });
+
+  const [cardsReviewed, setCardsReviewed] = useState(() => {
+    const review = localStorage.getItem('cardReviewed');
+    return review ? review : 0;
+  })
+
+  useLocalStorage({activeLink, deckId, deckMastery, timeArray, pomodoros, cardsReviewed});
 
   return (
     <Routes>
       <Route path="/decks" element={<DecksPage setActiveLink={setActiveLink} activeLink={activeLink} deckMastery={deckMastery} setDeckId={setDeckId} />} />
-      <Route path="/timer" element={<TimerPage  activeLink={activeLink} timeArray={timeArray} />}/>
+      <Route path="/timer" element={<TimerPage  activeLink={activeLink} timeArray={timeArray} setPomodoros={setPomodoros} pomodoros={pomodoros} />}/>
       <Route path="/study" element={<Navigate to={activeLink} replace />} />
-      <Route path="/study/:deckId" element={<StudyPage activeLink={activeLink} deckMastery={deckMastery} deckName={deckId} />} />
+      <Route path="/study/:deckId" element={<StudyPage activeLink={activeLink} deckMastery={deckMastery} deckName={deckId} cardsReviewed={cardsReviewed} setCardsReviewed={setCardsReviewed} />} />
       <Route path="/stats" element={<StatsPage activeLink={activeLink}  />} />
       <Route path="/settings" element={<SettingsPage activeLink={activeLink} setTimeArray={setTimeArray} />} />
-      <Route index element={<HomePage activeLink={activeLink}  />}/>
+      <Route index element={<HomePage activeLink={activeLink} pomodoros={pomodoros} cardsReviewed={cardsReviewed}  />}/>
     </Routes>
   )
 }

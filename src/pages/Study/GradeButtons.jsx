@@ -1,4 +1,14 @@
-export default function GradeButtons({ isRated, setisRated, setHard, setWrong, setGoodEasy, deckMastery, index }) {
+export default function GradeButtons({
+  isRated,
+  setisRated,
+  setHard,
+  setWrong,
+  setGoodEasy,
+  deckMastery,
+  index,
+  cardsReviewed,
+  setCardsReviwed,
+}) {
   return (
     <div className="grade-row">
       <button
@@ -8,6 +18,7 @@ export default function GradeButtons({ isRated, setisRated, setHard, setWrong, s
           if (isRated === false) {
             setWrong((prev) => prev + 1);
             setisRated(true);
+            setCardsReviwed(cardsReviewed + 1);
           }
         }}
       >
@@ -22,6 +33,7 @@ export default function GradeButtons({ isRated, setisRated, setHard, setWrong, s
             setHard((prev) => prev + 1);
             deckMastery[index] += 1;
             setisRated(true);
+            setCardsReviwed(cardsReviewed + 1);
           }
         }}
       >
@@ -36,6 +48,7 @@ export default function GradeButtons({ isRated, setisRated, setHard, setWrong, s
             setGoodEasy((prev) => prev + 1);
             deckMastery[index] += 1;
             setisRated(true);
+            setCardsReviwed(cardsReviewed + 1);
           }
         }}
       >
@@ -50,6 +63,7 @@ export default function GradeButtons({ isRated, setisRated, setHard, setWrong, s
             setGoodEasy((prev) => prev + 1);
             deckMastery[index] += 1;
             setisRated(true);
+            setCardsReviwed(cardsReviewed + 1);
           }
         }}
       >

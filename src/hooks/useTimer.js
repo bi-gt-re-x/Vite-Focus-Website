@@ -24,7 +24,9 @@ export function timeHandles({
   setCurrentTimeIndex, 
   timeArray, 
   setSelectedIndex, 
-  rounds 
+  rounds,
+  setPomodoros,
+  pomodoros 
 }) {
   const totalMaxTime = timeArray[currentTimeIndex];
 
@@ -58,6 +60,7 @@ export function timeHandles({
       } else if (currentTimeIndex === 2) {
         setRounds(0);
         nextIndex = 0;
+        setPomodoros(pomodoros + 1)
       }
 
       setSelectedIndex(nextIndex);

@@ -16,7 +16,7 @@ import RoundTrack from "./RoundTrack.jsx";
 import TimerDial from "./TimerDial.jsx";
 import { TimerSummary } from "./TimerSummary.jsx";
 
-export default function TimerPage({ activeLink, timeArray }) {
+export default function TimerPage({ activeLink, timeArray, setPomodoros, pomodoros }) {
   const [currentTimeIndex, setCurrentTimeIndex] = useState(0);
   const [timeLeft, setTimeLeft] = useState(timeArray[currentTimeIndex]);
   const [paused, setPaused] = useState(true);
@@ -31,7 +31,22 @@ export default function TimerPage({ activeLink, timeArray }) {
   const [cumuFocus, setCumuFocus] = useState(0);
   const [time, setTime] = useState(0);
 
-  timeHandles({ timeLeft, circumfrence, setOffSet, playChime, setRounds, setTimeLeft, currentTimeIndex, rounds, timeArray, setSelectedIndex, setCurrentTimeIndex });
+  timeHandles({ 
+    timeLeft,
+    circumfrence,
+    setOffSet, 
+    playChime, 
+    setRounds, 
+    setTimeLeft, 
+    currentTimeIndex, 
+    rounds, 
+    timeArray, 
+    setSelectedIndex, 
+    setCurrentTimeIndex, 
+    setPomodoros,
+    pomodoros 
+  });
+
   useTimer({ paused, timeLeft, time, setTimeLeft });
   timerSpaceShortcut({ paused, setPaused });
   timerResetShortcut({ timeLeft, setTimeLeft });

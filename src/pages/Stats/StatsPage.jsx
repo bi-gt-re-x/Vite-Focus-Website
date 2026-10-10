@@ -1,12 +1,8 @@
 import { Link } from "react-router-dom";
-import SideBar from "../components/layout/SideBar.jsx";
-import Topbar from "../components/layout/Topbar.jsx";
+import SideBar from "../../components/layout/SideBar.jsx";
+import Topbar from "../../components/layout/Topbar.jsx";
 
-// Everything on this page is hardcoded for phase 1. In phase 4 these arrays
-// get derived from ProgressContext — the shape is what matters now.
 
-// The one-line summary of the last 12 weeks. Supporting evidence for the
-// verdict above it, not the headline.
 const RECEIPTS = [
   { label: "focused", value: "41h" },
   { label: "rounds", value: "98" },
@@ -14,7 +10,7 @@ const RECEIPTS = [
   { label: "day streak", value: "7" },
 ];
 
-// The point of the page: what to do next, hardest-hitting first.
+
 const PLAN = [
   {
     id: "react-first",
@@ -67,8 +63,7 @@ const WINS = [
   },
 ];
 
-// `flagged` marks the day the advice is about, so the chart argues the same
-// point the text does. A quiet Saturday is not a problem; a quiet Wednesday is.
+
 const WEEK = [
   { label: "Mon", value: 45 },
   { label: "Tue", value: 70 },

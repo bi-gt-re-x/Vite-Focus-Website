@@ -33,12 +33,12 @@ export default function App() {
 
   const [pomodoros, setPomodoros] = useState(() => {
     const savedPomo = localStorage.getItem('pomodoros');
-    return savedPomo ? savedPomo : 0;
+    return savedPomo ? Number(savedPomo) : 0;
   });
 
   const [cardsReviewed, setCardsReviewed] = useState(() => {
-    const review = localStorage.getItem('cardReviewed');
-    return review ? review : 0;
+    const review = localStorage.getItem('cardsReviewed');
+    return review ? Number(review) : 0;
   })
 
   useLocalStorage({activeLink, deckId, deckMastery, timeArray, pomodoros, cardsReviewed});

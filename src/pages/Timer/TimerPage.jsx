@@ -53,8 +53,8 @@ export default function TimerPage({ activeLink, timeArray, setPomodoros, pomodor
   timerSkipShortcut({ timeLeft, setTimeLeft });
 
   const [workOn, setWorkOn] = useState(() => {
-    const savedMastery = localStorage.getItem('workon');
-    return savedMastery || ''
+    const savedWorkOn = localStorage.getItem('workon');
+    return savedWorkOn ? JSON.parse(savedWorkOn) : ''
   });
 
   useEffect(() => {

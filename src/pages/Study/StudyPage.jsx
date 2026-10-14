@@ -9,7 +9,7 @@ import FLASHCARDS from "../../data/flashcards.js";
 import { shuffle } from "../../utils/shuffle.js";
 import { studyFlipShortcut } from "../../hooks/useKeyboardShortcuts.js";
 
-export default function StudyPage({ activeLink, deckMastery, deckName, cardsReviewed, setCardsReviewed }) {
+export default function StudyPage({ activeLink, deckMastery, deckName, cardsReviewed, setCardsReviewed, setDue }) {
   const { deckId } = useParams();
   const [searchParams] = useSearchParams();
 
@@ -52,30 +52,14 @@ export default function StudyPage({ activeLink, deckMastery, deckName, cardsRevi
     index = 5;
   }
 
+  setDueCards(25 - cardsReviewed);
+
   return (
     <div className="app" data-collapsed="false">
       {<SideBar activeStudyLink={activeLink} />}
 
       <div className="app__main">
-        {<Topbar title="Stats" />}
-        <header className="topbar">
-          <h1 className="topbar__title">Study</h1>
-
-          <div className="topbar__actions">
-            <div className="topbar__mini-timer" data-running="true">
-              <span className="topbar__mini-dot"></span>
-              <span>18:42</span>
-            </div>
-
-            <button
-              className="btn btn--ghost btn--icon tooltip"
-              data-tip="Toggle theme"
-              aria-label="Toggle theme"
-            >
-              🌙
-            </button>
-          </div>
-        </header>
+        {<Topbar title="Study" />}
 
         <main className="content content--focus study-page">
           <div className="study-header">

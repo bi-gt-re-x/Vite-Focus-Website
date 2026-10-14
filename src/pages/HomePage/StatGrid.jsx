@@ -1,10 +1,12 @@
-export function StatGrid({ pomodoros, cardsReviewed }) {
+import { formatClockBasedOnTime } from "../../utils/time";
+
+export function StatGrid({ pomodoros, cardsReviewed, focusToday }) {
   return (
     <>
       <section className="stat-grid">
         <article className="stat-tile">
           <span className="stat-tile__label">Focus today</span>
-          <span className="stat-tile__value">2h 05m</span>
+          <span className="stat-tile__value">{formatClockBasedOnTime(focusToday)}</span>
           <span className="stat-tile__delta stat-tile__delta--up">
             ▲ 35m vs yesterday
           </span>

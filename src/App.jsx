@@ -7,6 +7,7 @@ import SettingsPage from './pages/Settings/SettingsPage.jsx';
 import { useLocalStorage } from './hooks/useLocalStorage.js';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { dailyReset } from './utils/time.js';
 
 export default function App() {
   const [activeLink, setActiveLink] = useState(() => {
@@ -41,17 +42,51 @@ export default function App() {
     return review ? Number(review) : 0;
   })
 
-  useLocalStorage({activeLink, deckId, deckMastery, timeArray, pomodoros, cardsReviewed});
+  const [focusToday, setFocusToday] = useState(() => {
+    const focusDaily = localStorage.getItem('todayFocus');
+    return focusDaily ? Number(focusDaily) : 0;
+  })
+
+  const [dueCards, setDue] = useState(() => {
+    const dueCards = localStorage.getItem('dueCards');
+    return dueCards ? Number(dueCards) : 0;
+  })
+
+  useLocalStorage({activeLink, deckId, deckMastery, timeArray, pomodoros, cardsReviewed, focusToday, dueCards});
+  dailyReset({ focusToday })
 
   return (
     <Routes>
       <Route path="/decks" element={<DecksPage setActiveLink={setActiveLink} activeLink={activeLink} deckMastery={deckMastery} setDeckId={setDeckId} />} />
-      <Route path="/timer" element={<TimerPage  activeLink={activeLink} timeArray={timeArray} setPomodoros={setPomodoros} pomodoros={pomodoros} />}/>
+
+      <Route path="/timer" element={<TimerPage  
+        activeLink={activeLink}
+        timeArray={timeArray}
+        setPomodoros={setPomodoros}
+        pomodoros={pomodoros}
+        focusToday={focusToday}
+        setFocusToday={setFocusToday}
+      />}/>
+
       <Route path="/study" element={<Navigate to={activeLink} replace />} />
-      <Route path="/study/:deckId" element={<StudyPage activeLink={activeLink} deckMastery={deckMastery} deckName={deckId} cardsReviewed={cardsReviewed} setCardsReviewed={setCardsReviewed} />} />
+      <Route path="/study/:deckId" element={<StudyPage 
+        activeLink={activeLink}
+        deckMastery={deckMastery}
+        deckName={deckId}
+        cardsReviewed={cardsReviewed}
+        setCardsReviewed={setCardsReviewed}
+        setDue={setDue}
+      />} />
+
       <Route path="/stats" element={<StatsPage activeLink={activeLink}  />} />
       <Route path="/settings" element={<SettingsPage activeLink={activeLink} setTimeArray={setTimeArray} />} />
-      <Route index element={<HomePage activeLink={activeLink} pomodoros={pomodoros} cardsReviewed={cardsReviewed}  />}/>
+      <Route index element={<HomePage
+        activeLink={activeLink}
+        pomodoros={pomodoros}
+        cardsReviewed={cardsReviewed}
+        focusToday={focusToday}
+        dueCards={dueCards}
+      />}/>
     </Routes>
   )
 }

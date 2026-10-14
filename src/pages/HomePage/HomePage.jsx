@@ -4,7 +4,7 @@ import Topbar from '../../components/layout/Topbar.jsx';
 import { ActivityGrid } from './ActivityGrid.jsx';
 import { StatGrid } from './StatGrid.jsx';
 
-export default function HomePage({ activeLink, pomodoros, cardsReviewed }) {
+export default function HomePage({ activeLink, pomodoros, cardsReviewed, focusToday, dueCards }) {
   return (
     <div className="app" data-collapsed="false">
       {<SideBar activeStudyLink={activeLink} />}
@@ -33,7 +33,7 @@ export default function HomePage({ activeLink, pomodoros, cardsReviewed }) {
                 </Link>
 
                 <Link className="btn btn--secondary btn--lg" to="/study">
-                  Review 12 due cards
+                  Review {dueCards} due cards
                 </Link>
               </div>
             </div>
@@ -45,7 +45,7 @@ export default function HomePage({ activeLink, pomodoros, cardsReviewed }) {
             </div>
           </section>
 
-          <StatGrid pomodoros={pomodoros} cardsReviewed={cardsReviewed} />
+          <StatGrid pomodoros={pomodoros} cardsReviewed={cardsReviewed} focusToday={focusToday} />
 
           <ActivityGrid />
         </main>
@@ -53,3 +53,4 @@ export default function HomePage({ activeLink, pomodoros, cardsReviewed }) {
     </div>
   );
 }
+ 

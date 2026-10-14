@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 
-export function useTimer({ paused, timeLeft, setTime, setTimeLeft }) {
+export function useTimer({ paused, timeLeft, setTime, setTimeLeft, focusToday, setFocusToday }) {
     useEffect(() => {
         if (paused || timeLeft <= 0) return;
 
         const timer = setInterval(() => {
             setTimeLeft(prev => prev - 1);
             setTime(prev => prev + 1);
+            setFocusToday(focusToday + 1)
         }, 1000);
 
         return () => clearInterval(timer);  

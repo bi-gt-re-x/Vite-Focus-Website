@@ -52,8 +52,6 @@ export default function StudyPage({ activeLink, deckMastery, deckName, cardsRevi
     index = 5;
   }
 
-  setDueCards(25 - cardsReviewed);
-
   return (
     <div className="app" data-collapsed="false">
       {<SideBar activeStudyLink={activeLink} />}
@@ -102,6 +100,7 @@ export default function StudyPage({ activeLink, deckMastery, deckName, cardsRevi
                 index={index}
                 cardsReviewed={cardsReviewed}
                 setCardsReviewed={setCardsReviewed}
+                setDue={setDue}
               />
               <div className="study-nav">
                 <button

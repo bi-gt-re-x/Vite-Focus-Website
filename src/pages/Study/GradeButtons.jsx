@@ -34,6 +34,7 @@ export default function GradeButtons({
             deckMastery[index] += 1;
             setisRated(true);
             setCardsReviwed(cardsReviewed + 1);
+            setDue(25 - cardsReviewed);
           }
         }}
       >
@@ -49,6 +50,7 @@ export default function GradeButtons({
             deckMastery[index] += 1;
             setisRated(true);
             setCardsReviwed(cardsReviewed + 1);
+            setDue(25 - cardsReviewed);
           }
         }}
       >
@@ -64,6 +66,7 @@ export default function GradeButtons({
             deckMastery[index] += 1;
             setisRated(true);
             setCardsReviwed(cardsReviewed + 1);
+            setDue(25 - cardsReviewed);
           }
         }}
       >

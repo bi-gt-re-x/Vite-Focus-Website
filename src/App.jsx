@@ -8,51 +8,23 @@ import { useLocalStorage } from './hooks/useLocalStorage.js';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { dailyReset } from './utils/time.js';
+import { useStudyState } from './hooks/useLocalStorage.js';
 
 export default function App() {
-  const [activeLink, setActiveLink] = useState(() => {
-    const savedLink = localStorage.getItem('studyLink');
-    return savedLink || '/study/javascript?emoji=🟨&name=JavaScript%20Fundamentals';
-  });
 
-  const [deckId, setDeckId] = useState(() => {
-    const deckId = localStorage.getItem('deckId');
-    return deckId || 'javascript';
-  });
+  const {
+    activeLink, setActiveLink,
+    deckId, setDeckId,
+    deckMastery, setDeckMastery,
+    timeArray, setTimeArray,
+    pomodoros, setPomodoros,
+    cardsReviewed, setCardsReviewed,
+    focusToday, setFocusToday,
+    dueCards, setDue,
+    accuracy, setAcc
+  } = useStudyState();
 
-  const [deckMastery, setDeckMastery] = useState(() => {
-    const savedMastery = localStorage.getItem('deckMastery');
-    return savedMastery ? JSON.parse(savedMastery)
-    : [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-  });
-
-  const [timeArray, setTimeArray] = useState(() => {  
-    const savedArray = localStorage.getItem('timeArray');
-    return savedArray ? JSON.parse(savedArray)
-    : [1500, 300, 900]
-  });
-
-  const [pomodoros, setPomodoros] = useState(() => {
-    const savedPomo = localStorage.getItem('pomodoros');
-    return savedPomo ? Number(savedPomo) : 0;
-  });
-
-  const [cardsReviewed, setCardsReviewed] = useState(() => {
-    const review = localStorage.getItem('cardsReviewed');
-    return review ? Number(review) : 0;
-  })
-
-  const [focusToday, setFocusToday] = useState(() => {
-    const focusDaily = localStorage.getItem('todayFocus');
-    return focusDaily ? Number(focusDaily) : 0;
-  })
-
-  const [dueCards, setDue] = useState(() => {
-    const dueCards = localStorage.getItem('dueCards');
-    return dueCards ? Number(dueCards) : 0;
-  })
-
-  useLocalStorage({activeLink, deckId, deckMastery, timeArray, pomodoros, cardsReviewed, focusToday, dueCards});
+  useLocalStorage({activeLink, deckId, deckMastery, timeArray, pomodoros, cardsReviewed, focusToday, dueCards, accuracy});
   dailyReset({ focusToday })
 
   return (
@@ -76,16 +48,19 @@ export default function App() {
         cardsReviewed={cardsReviewed}
         setCardsReviewed={setCardsReviewed}
         setDue={setDue}
+        setAcc={setAcc}
+        accuracy={accuracy}
       />} />
 
       <Route path="/stats" element={<StatsPage activeLink={activeLink}  />} />
-      <Route path="/settings" element={<SettingsPage activeLink={activeLink} setTimeArray={setTimeArray} />} />
+      <Route path="/settings" element={<SettingsPage activeLink={activeLink} setTimeArray={setTimeArray} timeArray={timeArray} />} />
       <Route index element={<HomePage
         activeLink={activeLink}
         pomodoros={pomodoros}
         cardsReviewed={cardsReviewed}
         focusToday={focusToday}
         dueCards={dueCards}
+        accuracy={accuracy}
       />}/>
     </Routes>
   )

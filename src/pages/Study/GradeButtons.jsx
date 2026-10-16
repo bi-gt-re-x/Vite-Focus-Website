@@ -8,6 +8,8 @@ export default function GradeButtons({
   index,
   cardsReviewed,
   setCardsReviwed,
+  setAcc,
+  accuracy
 }) {
   return (
     <div className="grade-row">
@@ -19,6 +21,9 @@ export default function GradeButtons({
             setWrong((prev) => prev + 1);
             setisRated(true);
             setCardsReviwed(cardsReviewed + 1);
+            if (accuracy > 1) {
+              setAcc(accuracy - 1)
+            }
           }
         }}
       >
@@ -35,6 +40,9 @@ export default function GradeButtons({
             setisRated(true);
             setCardsReviwed(cardsReviewed + 1);
             setDue(25 - cardsReviewed);
+            if (accuracy > 0.5) {
+              setAcc(accuracy - 0.5)
+            }
           }
         }}
       >
@@ -51,6 +59,9 @@ export default function GradeButtons({
             setisRated(true);
             setCardsReviwed(cardsReviewed + 1);
             setDue(25 - cardsReviewed);
+            if (accuracy <= 99) {
+              setAcc(accuracy + 1)
+            }
           }
         }}
       >
@@ -67,6 +78,9 @@ export default function GradeButtons({
             setisRated(true);
             setCardsReviwed(cardsReviewed + 1);
             setDue(25 - cardsReviewed);
+            if (accuracy <= 99) {
+              setAcc(accuracy + 1)
+            }
           }
         }}
       >

@@ -5,7 +5,7 @@ import Topbar from "../../components/layout/Topbar.jsx";
 import { TimerSwitch } from "./TimerSwitch.jsx";
 import { THEMES } from "../../data/themes.js";
 
-export default function SettingsPage({ activeLink, setTimeArray }) {
+export default function SettingsPage({ activeLink, setTimeArray, timeArray }) {
   const buttons = ["Classic · 25/5/15", "Deep work · 50/10/30", "Sprint · 15/3/10"];
   const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -68,11 +68,11 @@ export default function SettingsPage({ activeLink, setTimeArray }) {
                     </div>
 
                     <div className="stepper">
-                      <button className="stepper__btn" aria-label="Decrease">
+                      <button className="stepper__btn" aria-label="Decrease" onClick={() => {setTimeArray([timeArray[0] - 60, timeArray[1], timeArray[2]])}}>
                         −
                       </button>
-                      <span className="stepper__value">25</span>
-                      <button className="stepper__btn" aria-label="Increase">
+                      <span className="stepper__value">{timeArray[0] / 60}</span>
+                      <button className="stepper__btn" aria-label="Increase" onClick={() => {setTimeArray([timeArray[0] + 60, timeArray[1], timeArray[2]])}}>
                         +
                       </button>
                     </div>
@@ -89,11 +89,11 @@ export default function SettingsPage({ activeLink, setTimeArray }) {
                     </div>
 
                     <div className="stepper">
-                      <button className="stepper__btn" aria-label="Decrease">
+                      <button className="stepper__btn" aria-label="Decrease" onClick={() => {setTimeArray([timeArray[0], timeArray[1] - 60, timeArray[2]])}}>
                         −
                       </button>
-                      <span className="stepper__value">5</span>
-                      <button className="stepper__btn" aria-label="Increase">
+                      <span className="stepper__value">{timeArray[1] / 60}</span>
+                      <button className="stepper__btn" aria-label="Increase" onClick={() => {setTimeArray([timeArray[0], timeArray[1] + 60, timeArray[2]])}}>
                         +
                       </button>
                     </div>
@@ -110,11 +110,11 @@ export default function SettingsPage({ activeLink, setTimeArray }) {
                     </div>
 
                     <div className="stepper">
-                      <button className="stepper__btn" aria-label="Decrease">
+                      <button className="stepper__btn" aria-label="Decrease" onClick={() => {setTimeArray([timeArray[0], timeArray[1], timeArray[2] - 60])}}>
                         −
                       </button>
-                      <span className="stepper__value">15</span>
-                      <button className="stepper__btn" aria-label="Increase">
+                      <span className="stepper__value">{timeArray[2] / 60}</span>
+                      <button className="stepper__btn" aria-label="Increase" onClick={() => {setTimeArray([timeArray[0], timeArray[1], timeArray[2] + 60])}}>
                         +
                       </button>
                     </div>
